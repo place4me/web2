@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ThingsPool</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <style media="screen">
+    body{margin:0px; background-color:#404040; color:#d0d0d0;}
+    .games{grid-area:a; padding:16px;}
+    .menu{grid-area:b}
+    .left{grid-area:c; padding:24px;}
+    .contents{grid-area:d; padding:24px;}
+    .right{grid-area:e; padding:24px;}
+    .bottom{grid-area:f; padding:24px;}
+    .container{
+      display:grid;
+      grid-template-areas:
+      'a a a'
+      'b b b'
+      'd d e'
+      'f f f';
+      grid-gap: 0;
+    }
+    .container > div{
+      /* border: 1px solid #f0f0f0; */
+      text-align: center;
+      font-size: 20px;
+    }
+    .menu ul{
+      list-style-type:none;
+      margin:0;
+      padding:0;
+      overflow:hidden;
+      background-color: #505050;
+    }
+    .menu li{
+      float:left;
+    }
+    .menu li a{
+      display:block;
+      text-align:center;
+      padding:16px;
+      text-decoration:none;
+      font-family:verdana;
+      color:#d0d0d0;
+    }
+    .menu li a:hover{
+      background-color:#d0d0d0;
+      color:#404040;
+    }
+
+    @media(max-width:800px){
+      .container{
+        display:block;
+      }
+    }
+    @media(max-width:600px){
+      .left, .right{
+        display:none;
+      }
+    }
+
+    .dropdown{
+      position:relative;
+      display:inline-block;
+      float:left;
+      width:33.33%;
+    }
+    /* dropdown content (hidden by default) */
+    .dropdown_content{
+      display:none;
+      position:absolute;
+      background-color:#f5f5f5;
+      width:100%;
+      box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index:1;
+    }
+    /* Show the dropdown menu */
+    .dropdown:hover .dropdown_content{
+      display:block;
+    }
+    /* Change of dropdown button color at hover */
+      .dropdown:hover .dropbtn{
+      background-color:#d0d0d0;
+      color:#505050;
+      }
+    /* Style of dropdown button */
+    .dropbtn{
+      background-color:#505050;
+      color:#d0d0d0;
+      width:100%;
+      padding:12px;
+      font-size:24px;
+      cursor:pointer;
+      border:none;
+    }
+    /* Links inside the dropdown */
+    .dropdown_content a{
+      color:black;
+      padding:12px;
+      text-decoration:none;
+      display:block;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    /* Change of dropdown link color at hover */
+    .dropdown_content a:hover{
+      background-color:linen;
+      font-weight:bold;
+      overflow:visible;
+    }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="games"><h1><img src="images\icon_65.png"><big>&nbsp ThingsPool</big></h1></div>
+
+      <div class="menu">
+        <div class="dropdown">
+          <a href="index.html"><button class="dropbtn" type="button" name="button">Home</button></a>
+        </div>
+        <div class="dropdown">
+          <button class="dropbtn" type="button" name="button">Games</button>
+          <div class="dropdown_content">
+            <a href="game01.html">Game_1</a>
+            <a href="game02.html">Game_2</a>
+            <a href="game03.html">Game_3</a>
+            <a href="game04.html">Game_4</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <a href="contactus.html"><button class="dropbtn" type="button" name="button">Contact Us</button></a>
+        </div>
+      </div>
+      <div class="contents"><iframe width="560" height="315"
+        src="https://www.youtube.com/embed/EvcSOuDKNGg?rel=0" frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe></div>
+      <div class="right"><br>설명<br>설명<br>설명</div>
+      <div class="bottom">07-25-2019</div>
+    </div>
+  </body>
+</html>
