@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ThingsPool</title>
+    <link rel="shortcut icon" href="thingspool_favicon.ico">
+    <style media="screen">
+    body{margin:0px; background-color:#404040; color:#d0d0d0;}
+    .games{grid-area:a; padding:16px;}
+      .menu{grid-area:b}
+      .contents{grid-area:d; padding:24px;}
+      .bottom{grid-area:f; padding:24px; padding-top:72px;}
+      .container{
+        display:grid;
+        grid-template-areas:
+        'a'
+        'b'
+        'd'
+        'f';
+      grid-gap: 0;
+      font-family:calibri;
+    }
+    .container > div{
+      /* border: 1px solid #f0f0f0; */
+      text-align: center;
+      font-size: 20px;
+    }
+    .menu ul{
+      list-style-type:none;
+      margin:0;
+      padding:0;
+      overflow:hidden;
+      background-color: #505050;
+    }
+    .menu li{
+      float:left;
+    }
+    .menu li a{
+      display:block;
+      text-align:center;
+      padding:16px;
+      text-decoration:none;
+      font-family:verdana;
+      color:#d0d0d0;
+      font-family:calibri;
+    }
+    .menu li a:hover{
+      background-color:#d0d0d0;
+      color:#404040;
+    }
+
+    @media(max-width:800px){
+      .container{
+        display:block;
+      }
+    }
+    @media(max-width:600px){
+      .left, .right{
+        display:none;
+      }
+    }
+
+    .dropdown{
+      position:relative;
+      display:inline-block;
+      float:left;
+      width:25%;
+    }
+    /* dropdown content (hidden by default) */
+    .dropdown_content{
+      display:none;
+      position:absolute;
+      background-color:#f5f5f5;
+      width:100%;
+      box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index:1;
+    }
+    /* Show the dropdown menu */
+    .dropdown:hover .dropdown_content{
+      display:block;
+    }
+    /* Change of dropdown button color at hover */
+      .dropdown:hover .dropbtn{
+      background-color:#d0d0d0;
+      color:#505050;
+      }
+    /* Style of dropdown button */
+    .dropbtn{
+      background-color:#505050;
+      color:#d0d0d0;
+      width:100%;
+      padding:12px;
+      font-size:24px;
+      cursor:pointer;
+      border:none;
+    }
+    /* Links inside the dropdown */
+    .dropdown_content a{
+      color:black;
+      padding:12px;
+      text-decoration:none;
+      display:block;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    /* Change of dropdown link color at hover */
+    .dropdown_content a:hover{
+      background-color:linen;
+      font-weight:bold;
+      overflow:visible;
+    }
+
+    li > a {
+      text-decoration: none;
+    }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="games"><h1><img src="images\thingspool_tp_gray_128.png"><big>&nbsp ThingsPool</big></h1></div>
+
+      <div class="menu">
+        <div class="dropdown">
+          <a href="index.html"><button class="dropbtn" type="button" name="button">Home</button></a>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropbtn" type="button" name="button">Our Games</button>
+          <div class="dropdown_content">
+            <a href="game01.html">Sarsen Adventure</a>
+            <a href="game02.html">FirePool</a>
+            <a href="game03.html">Game_3</a>
+            <a href="game04.html">Game_4</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <a href="writings.html"><button class="dropbtn" type="button"
+            name="button">Writings</button></a>
+        </div>
+
+        <div class="dropdown">
+          <a href="contactus.html"><button class="dropbtn" type="button" name="button">Contact Us</button></a>
+        </div>
+      </div>
+
+      <div class="contents"; style="text-align:left; line-height:2em; padding-left:48px;">
+        <ul style = "list-style-type:circle">
+          <li><a href="writings\wr001.html"; target="_blank"; style="color:#d0d0d0">게임 "호버!"(Hover!)를 통해 보는 물리적 전략시뮬레이션</a></li>
+
+          <li><a href="writings\wr002.html"; target="_blank"; style="color:#d0d0d0">게임 속에 등장하는 공포의 심리학</a></li>
+        
+          <li><a href="writings\wr003.html"; target="_blank"; style="color:#d0d0d0">게임 - 사용자의 배경지식을 활용하라</a></li>
+
+          <li><a href="writings\wr004.html"; target="_blank"; style="color:#d0d0d0">게임분석 - 자유답지 않은 자유</a></li>
+        
+          <li><a href="writings\wr005.html"; target="_blank"; style="color:#d0d0d0">튜링 테스트를 통과하는 게임들</a></li>
+
+          <li><a href="writings\wr006.html"; target="_blank"; style="color:#d0d0d0">게임분석 - 기술의 제약이 만들어낸 개성</a></li>
+
+          <li><a href="writings\wr007.html"; target="_blank"; style="color:#d0d0d0">토이스토리 2와 심슨 히트 앤 런의 레벨 디자인이 말해주는 조화의 미</a></li>
+
+          <li><a href="writings\wr008.html"; target="_blank"; style="color:#d0d0d0">초창기 심즈에 관한 이야기 (심즈의 역사) - 1/4</a></li>
+
+          <li><a href="writings\wr009.html"; target="_blank"; style="color:#d0d0d0">초창기 심즈에 관한 이야기 (심즈의 역사) - 2/4</a></li>
+
+          <li><a href="writings\wr001.html"; target="_blank"; style="color:#d0d0d0">초창기 심즈에 관한 이야기 (심즈의 역사) - 3/4</a></li>
+        </ul>  
+
+
+      </div>
+
+      <div class="bottom"; style="font-size:14px;">
+        &copy 2019 ThingsPool. All rights reserved. 
+      </div>
+
+    </div>
+  </body>
+</html>
