@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ThingsPool</title>
+    <link rel="shortcut icon" href="thingspool_favicon.ico">
+    <style media="screen">
+    body{margin:0px; background-color:#404040; color:#d0d0d0;}
+    .games{grid-area:a; padding:16px;}
+      .menu{grid-area:b}
+      .contents{grid-area:d; padding:24px;}
+      .bottom{grid-area:f; padding:24px; padding-top:72px;}
+      .container{
+        display:grid;
+        grid-template-areas:
+        'a'
+        'b'
+        'd'
+        'f';
+      grid-gap: 0;
+      font-family:calibri;
+    }
+    .container > div{
+      /* border: 1px solid #f0f0f0; */
+      text-align: center;
+      font-size: 20px;
+    }
+    .menu ul{
+      list-style-type:none;
+      margin:0;
+      padding:0;
+      overflow:hidden;
+      background-color: #505050;
+    }
+    .menu li{
+      float:left;
+    }
+    .menu li a{
+      display:block;
+      text-align:center;
+      padding:16px;
+      text-decoration:none;
+      font-family:verdana;
+      color:#d0d0d0;
+      font-family:calibri;
+    }
+    .menu li a:hover{
+      background-color:#d0d0d0;
+      color:#404040;
+    }
+
+    @media(max-width:800px){
+      .container{
+        display:block;
+      }
+    }
+    @media(max-width:600px){
+      .left, .right{
+        display:none;
+      }
+    }
+
+    .dropdown{
+      position:relative;
+      display:inline-block;
+      float:left;
+      width:25%;
+    }
+    /* dropdown content (hidden by default) */
+    .dropdown_content{
+      display:none;
+      position:absolute;
+      background-color:#f5f5f5;
+      width:100%;
+      box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index:1;
+    }
+    /* Show the dropdown menu */
+    .dropdown:hover .dropdown_content{
+      display:block;
+    }
+    /* Change of dropdown button color at hover */
+      .dropdown:hover .dropbtn{
+      background-color:#d0d0d0;
+      color:#505050;
+      }
+    /* Style of dropdown button */
+    .dropbtn{
+      background-color:#505050;
+      color:#d0d0d0;
+      width:100%;
+      padding:12px;
+      font-size:24px;
+      cursor:pointer;
+      border:none;
+    }
+    /* Links inside the dropdown */
+    .dropdown_content a{
+      color:black;
+      padding:12px;
+      text-decoration:none;
+      display:block;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    /* Change of dropdown link color at hover */
+    .dropdown_content a:hover{
+      background-color:linen;
+      font-weight:bold;
+      overflow:visible;
+    }
+
+    li > a {
+      text-decoration: none;
+    }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="games"><h1><img src="images/thingspool_tp_gray_128.png"><big>&nbsp ThingsPool</big></h1></div>
+
+      <div class="menu">
+        <div class="dropdown">
+          <a href="index.html"><button class="dropbtn" type="button" name="button">Home</button></a>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropbtn" type="button" name="button">Our Games</button>
+          <div class="dropdown_content">
+            <a href="game01.html">Sarsen Adventure</a>
+            <a href="game02.html">FirePool</a>
+            <a href="game03.html">Game_3</a>
+            <a href="game04.html">Game_4</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropbtn" type="button" name="button">Other Works</button>
+          <div class="dropdown_content">
+            <a href="writings.html">Writings</a>
+            <a href="characters.html">Characters</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <a href="contactus.html"><button class="dropbtn" type="button" name="button">Contact Us</button></a>
+        </div>
+      </div>
+
+      <div class="contents"; style="text-align:left; line-height:32px; padding-left:48px;">
+        <ul style = "list-style-type:circle">
+          <li><a href="writings/wr001.html"; target="_blank"; style="color:#d0d0d0">게임 "호버!"(Hover!)를 통해 보는 물리적 전략시뮬레이션</a></li>
+
+          <li><a href="writings/wr002.html"; target="_blank"; style="color:#d0d0d0">게임 속에 등장하는 공포의 심리학</a></li>
+        
+          <li><a href="writings/wr003.html"; target="_blank"; style="color:#d0d0d0">게임 - 사용자의 배경지식을 활용하라</a></li>
+
+          <li><a href="writings/wr004.html"; target="_blank"; style="color:#d0d0d0">게임분석 - 자유답지 않은 자유</a></li>
+        
+          <li><a href="writings/wr005.html"; target="_blank"; style="color:#d0d0d0">튜링 테스트를 통과하는 게임들</a></li>
+
+          <li><a href="writings/wr006.html"; target="_blank"; style="color:#d0d0d0">게임분석 - 기술의 제약이 만들어낸 개성</a></li>
+
+          <li><a href="writings/wr007.html"; target="_blank"; style="color:#d0d0d0">토이스토리 2와 심슨 히트 앤 런의 레벨 디자인이 말해주는 조화의 미</a></li>
+
+          <li><a href="writings/wr008.html"; target="_blank"; style="color:#d0d0d0">초창기 심즈에 관한 이야기 (심즈의 역사) - 1</a></li>
+
+          <li><a href="writings/wr009.html"; target="_blank"; style="color:#d0d0d0">초창기 심즈에 관한 이야기 (심즈의 역사) - 2</a></li>
+
+          <li><a href="writings/wr010.html"; target="_blank"; style="color:#d0d0d0">초창기 심즈에 관한 이야기 (심즈의 역사) - 3</a></li>
+
+          <br>
+
+          <li><a href="writings/wr011.html"; target="_blank"; style="color:#d0d0d0">초창기 심즈에 관한 이야기 (심즈의 역사) - 4</a></li>
+
+          <li><a href="writings/wr012.html"; target="_blank"; style="color:#d0d0d0">초창기 심즈에 관한 이야기 (심즈의 역사) - 5</a></li>
+
+          <li><a href="writings/wr013.html"; target="_blank"; style="color:#d0d0d0">초창기 심즈에 관한 이야기 (심즈의 역사) - 6</a></li>
+
+          <li><a href="writings/wr014.html"; target="_blank"; style="color:#d0d0d0">초창기 심즈에 관한 이야기 (심즈의 역사) - 7</a></li>
+
+          <li><a href="writings/wr016.html"; target="_blank"; style="color:#d0d0d0">게임 속 신비주의</a></li>
+
+          <li><a href="writings/wr017.html"; target="_blank"; style="color:#d0d0d0">방치형 게임을 통해 보는 게임정신의 종말 - 1</a></li>
+
+          <li><a href="writings/wr018.html"; target="_blank"; style="color:#d0d0d0">방치형 게임을 통해 보는 게임정신의 종말 - 2</a></li>
+          
+          <li><a href="writings/wr023.html"; target="_blank"; style="color:#d0d0d0">재미의 근본</a></li>
+
+          <li><a href="writings/wr024.html"; target="_blank"; style="color:#d0d0d0">전략적 다양성</a></li>
+
+          <li><a href="writings/wr015.html"; target="_blank"; style="color:#d0d0d0">대한민국 심즈 커뮤니티의 역사 - 1</a></li>
+
+          <br>
+
+          <li><a href="writings/wr019.html"; target="_blank"; style="color:#d0d0d0">대한민국 심즈 커뮤니티의 역사 - 2</a></li>
+
+          <li><a href="writings/wr020.html"; target="_blank"; style="color:#d0d0d0">대한민국 심즈 커뮤니티의 역사 - 3</a></li>
+
+          <li><a href="writings/wr021.html"; target="_blank"; style="color:#d0d0d0">대한민국 심즈 커뮤니티의 역사 - 4</a></li>
+
+          <li><a href="writings/wr022.html"; target="_blank"; style="color:#d0d0d0">대한민국 심즈 커뮤니티의 역사 - 5</a></li>
+
+          <li><a href="writings/wr025.html"; target="_blank"; style="color:#d0d0d0">대한민국 심즈 커뮤니티의 역사 - 6 (월드심즈, 쿠킵의 심즈카페)</a></li>
+
+          <li><a href="writings/wr026.html"; target="_blank"; style="color:#d0d0d0">대한민국 심즈 커뮤니티의 역사 - 7 (월드심즈, 쿠킵의 심즈카페)</a></li>
+
+          <li><a href="writings/wr027.html"; target="_blank"; style="color:#d0d0d0">대한민국 심즈 커뮤니티의 역사 - 8 (월드심즈, 쿠킵의 심즈카페)</a></li>
+
+          <li><a href="writings/wr031.html"; target="_blank"; style="color:#d0d0d0">대한민국 심즈 커뮤니티의 역사 - 9 (월드심즈, 쿠킵의 심즈카페)</a></li>
+
+          <li><a href="writings/wr032.html"; target="_blank"; style="color:#d0d0d0">대한민국 심즈 커뮤니티의 역사 - 10 (월드심즈, 쿠킵의 심즈카페)</a></li>
+
+          <li><a href="writings/wr033.html"; target="_blank"; style="color:#d0d0d0">대한민국 심즈 커뮤니티의 역사 - 11 (에필로그)</a></li>
+
+          <br>
+
+          <li><a href="writings/wr034.html"; target="_blank"; style="color:#d0d0d0">대한민국 심즈 커뮤니티의 역사 - 12 (에필로그)</a></li>
+
+          <li><a href="writings/wr028.html"; target="_blank"; style="color:#d0d0d0">게임의 완성은 유저가 한다</a></li>
+
+          <li><a href="writings/wr029.html"; target="_blank"; style="color:#d0d0d0">도구로서의 게임</a></li>
+
+          <li><a href="writings/wr030.html"; target="_blank"; style="color:#d0d0d0">컨트롤은 어떻게 디자인 하는가?</a></li>
+          
+          <li><a href="writings/wr035.html"; target="_blank"; style="color:#d0d0d0">미래의 사람들은 어떤 게임을 할까? - 1</a></li>
+
+          <li><a href="writings/wr036.html"; target="_blank"; style="color:#d0d0d0">미래의 사람들은 어떤 게임을 할까? - 2</a></li>
+
+          <li><a href="writings/wr037.html"; target="_blank"; style="color:#d0d0d0">서버 중심의 게임플레이</a></li>
+
+          <li><a href="writings/wr038.html"; target="_blank"; style="color:#d0d0d0">분산형 컴퓨팅에 관한 기대</a></li>
+
+          <li><a href="writings/wr039.html"; target="_blank"; style="color:#d0d0d0">게임과 브랜드 사이의 상관관계</a></li>
+
+          <li><a href="writings/wr040.html"; target="_blank"; style="color:#d0d0d0">게임 속의 일반화</a></li>
+
+          <br>
+
+          <li><a href="writings/wr041.html"; target="_blank"; style="color:#d0d0d0">마이너한 게임이 살아남는 방법</a></li>
+
+          <li><a href="writings/wr042.html"; target="_blank"; style="color:#d0d0d0">기계에게는 적당한 멍청함이 필요하다</a></li>
+
+          <li><a href="writings/wr043.html"; target="_blank"; style="color:#d0d0d0">억눌린 감정들에 대한 정신분석</a></li>
+
+          <li><a href="writings/wr044.html"; target="_blank"; style="color:#d0d0d0">게임 속의 모든 것은 화폐로 이루어져 있다</a></li>
+
+          <li><a href="writings/wr045.html"; target="_blank"; style="color:#d0d0d0">눈속임의 미학</a></li>
+
+          <li><a href="writings/wr046.html"; target="_blank"; style="color:#d0d0d0">에듀테인먼트</a></li>
+
+          <li><a href="writings/wr047.html"; target="_blank"; style="color:#d0d0d0">멀티플레이어 게임의 장점들 - 1</a></li>
+
+          <li><a href="writings/wr048.html"; target="_blank"; style="color:#d0d0d0">멀티플레이어 게임의 장점들 - 2</a></li>
+
+          <li><a href="writings/wr049.html"; target="_blank"; style="color:#d0d0d0">멀티플레이어 게임의 장점들 - 3</a></li>
+
+          <li><a href="writings/wr050.html"; target="_blank"; style="color:#d0d0d0">게임 속 소유욕 - 1</a></li>
+
+          <br>
+
+          <li><a href="writings/wr051.html"; target="_blank"; style="color:#d0d0d0"></a></li>
+
+          <br>
+
+          
+
+        </ul>  
+
+
+      </div>
+
+      <div class="bottom"; style="font-size:14px;">
+        &copy 2019 ThingsPool. All rights reserved. 
+      </div>
+
+    </div>
+  </body>
+</html>
