@@ -1,1 +1,1 @@
-https://play.google.com/store/apps/details?id=com.ThingsPool.FirePool,https://thingspool.net,0.10,9,20,50,81
+https://play.google.com/store/apps/details?id=com.ThingsPool.FirePool,https://thingspool.net,0.08,9,20,50,81
