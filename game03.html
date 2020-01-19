@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ThingsPool</title>
+    <link rel="shortcut icon" href="thingspool_favicon.ico">
+    <style media="screen">
+    body{margin:0px; background-color:#404040; color:#d0d0d0;}
+    .games{grid-area:games; padding:16px;}
+    .menu{grid-area:menu}
+    .contents1{grid-area:contents1; padding:24px;}
+    .contents2{grid-area:contents2; padding:48px; font-size:28px; color:khaki;}
+    .bottom{grid-area:bottom; padding:24px; padding-top:72px;}
+    .container{
+      display:grid;
+      grid-template-areas:
+      'games'
+      'menu'
+      'contents1'
+      'contents2'
+      'bottom';
+      grid-gap: 0;
+      font-family:calibri;
+    }
+    .container > div{
+      /* border: 1px solid #f0f0f0; */
+      text-align: center;
+      font-size: 20px;
+    }
+    .menu ul{
+      list-style-type:none;
+      margin:0;
+      padding:0;
+      overflow:hidden;
+      background-color: #505050;
+    }
+    .menu li{
+      float:left;
+    }
+    .menu li a{
+      display:block;
+      text-align:center;
+      padding:16px;
+      text-decoration:none;
+      font-family:verdana;
+      color:#d0d0d0;
+      font-family:calibri;
+    }
+    .menu li a:hover{
+      background-color:#d0d0d0;
+      color:#404040;
+    }
+
+    @media(max-width:800px){
+      .container{
+        display:block;
+      }
+    }
+    /*@media(max-width:600px){
+      .contents1, .contents2{
+        display:none;
+      }
+    }*/
+
+    .dropdown{
+      position:relative;
+      display:inline-block;
+      float:left;
+      width:25%;
+    }
+    /* dropdown content (hidden by default) */
+    .dropdown_content{
+      display:none;
+      position:absolute;
+      background-color:#f5f5f5;
+      width:100%;
+      box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index:1;
+    }
+    /* Show the dropdown menu */
+    .dropdown:hover .dropdown_content{
+      display:block;
+    }
+    /* Change of dropdown button color at hover */
+      .dropdown:hover .dropbtn{
+      background-color:#d0d0d0;
+      color:#505050;
+      }
+    /* Style of dropdown button */
+    .dropbtn{
+      background-color:#505050;
+      color:#d0d0d0;
+      width:100%;
+      padding:12px;
+      font-size:24px;
+      cursor:pointer;
+      border:none;
+    }
+    /* Links inside the dropdown */
+    .dropdown_content a{
+      color:black;
+      padding:12px;
+      text-decoration:none;
+      display:block;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    /* Change of dropdown link color at hover */
+    .dropdown_content a:hover{
+      background-color:linen;
+      font-weight:bold;
+      overflow:visible;
+    }
+
+/* body image */
+*{
+  box-sizing: border-box;
+}
+/* size of div block */
+  div.gallery{
+    border:1px solid #606060;
+    padding:10px;
+    float:left;
+    width:50%;
+  }
+
+/* size of each image
+  div.gallery img{
+    width:100%;
+    height:auto;
+  }
+ */
+  div.gallery img{
+    height:75%;
+    width:auto;
+  }
+
+  div.desc{
+    padding:5px;
+    text-align: center;
+    font-size: 2.5vw;
+    height:60px; 
+  }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="games"><h1><img src="images\thingspool_tp_gray_128.png"><big>&nbsp ThingsPool</big></h1></div>
+
+      <div class="menu">
+        <div class="dropdown">
+          <a href="index.html"><button class="dropbtn" type="button" name="button">Home</button></a>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropbtn" type="button" name="button">Our Games</button>
+          <div class="dropdown_content">
+            <a href="game01.html">Sarsen Adventure</a>
+            <a href="game02.html">FirePool</a>
+            <a href="game03.html">Art Raider</a>
+            <a href="game04.html">Game_4</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropbtn" type="button" name="button">Other Works</button>
+          <div class="dropdown_content">
+            <a href="writings.html">Writings</a>
+            <a href="characters.html">Characters</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <a href="contactus.html"><button class="dropbtn" type="button" name="button">Contact Us</button></a>
+        </div>
+      </div>
+      
+      <div class="contents1">
+        <div>
+          <div style="font-size:2vw; color:#d0d0d0">
+            New Game
+          </div>  
+          <div style="font-size:4vw; color:#ffff00">
+            Art Raider
+          </div>  
+
+          <br>
+        <!--
+          <a href="https://play.google.com/store/apps/details?id=com.ThingsPool.FirePool">  
+          <img src="images/google_badge.png" width="15%">          
+          </a>
+          &nbsp&nbsp&nbsp&nbsp&nbsp
+          <a href="https://onesto.re/0000743408">  
+          <img src="images/one_badge_black.png" width="15%">     
+          </a>
+          &nbsp&nbsp&nbsp&nbsp&nbsp
+          <a href="https://onesto.re/0000743408">  
+          <img src="images/itch_badge.png" width="15%">     
+          </a>
+        -->
+        
+        </div><br>
+
+        <div class="gallery">
+          <img src="images\ar_sc1.jpg" alt="Play image1" style="width:100%">
+          <div class="desc">Tactical Art Museum Simulator. </div>
+        </div>
+
+        <div class="gallery">
+          <img src="images\ar_sc4.jpg" alt="Play image2" style="width:100%">
+          <div class="desc">Make your own maps. </div>
+        </div>
+
+        <div class="gallery">
+          <img src="images\ar_sc5.jpg" alt="Play image3" style="width:100%">
+          <div class="desc">Clear missions and get stars. </div>
+        </div>
+
+        <div class="gallery">
+          <img src="images\ar_sc7.jpg" alt="Play image4" style="width:100%">
+          <div class="desc">Find the artworks. </div>
+        </div>
+
+        <div class="gallery">
+          <img src="images\ar_sc10.jpg" alt="Play image5" style="width:100%">
+          <div class="desc">Noticed by an officer! </div>
+        </div>
+
+        <div class="gallery">
+          <img src="images\ar_sc13.jpg" alt="Play image6" style="width:100%">
+          <div class="desc">Dodge the eyes of security officers.</div>
+        </div>
+
+        <div class="gallery">
+          <img src="images\ar_sc14.jpg" alt="Play image6" style="width:100%">
+          <div class="desc">Steal the artwork. </div>
+        </div>
+
+        <div class="gallery">
+          <img src="images\ar_sc16.jpg" alt="Play image6" style="width:100%">
+          <div class="desc">Put it in the box.</div>
+        </div>
+
+
+      <canvas width=50 height=24>
+      </canvas>
+
+      <div class="contents2">
+        You are performing missions as an art thief. Secretely pick up the artworks you are supposed to steal and put them in the box. Be careful not to get noticed by officers while carrying them! A detached artwork can be attached back to the wall.<br><br>
+        - We can exhibit your own artworks (Just fill out the online form).<br><br>
+        - Editable maps<br><br>
+        - Resource-sharing community (https://cafe.naver.com/thingspool)<br><br>
+        <br>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/4tziqzEOE3I" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        
+      <!--
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/VaOgER3595s?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      -->  
+      </div>
+      <br>
+
+      <div class="bottom"; style="font-size:14px;">
+        &copy 2019-2020 ThingsPool. All rights reserved. 
+        &nbsp &nbsp
+        <a href="artraider_privacy_policy.html"; style="color:#d0d0d0;">privacy policy</a>
+        &nbsp &nbsp
+        <a href="artraider_terms_and_conditions.html"; style="color:#d0d0d0;">terms and conditions</a>
+      </div>
+
+    </div>
+
+
+  </body>
+</html>
