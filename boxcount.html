@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport">
+
+		<style>
+			body {
+				color: white;
+				width: 100%;
+				height: 100%;
+				background-color: gray;
+				font-size: 300%;
+				margin-left: 5vw;
+				margin-right: 5vw;
+				margin-top: 5vh;
+				margin-bottom: 5vh;
+				overflow-x: hidden;
+				overflow-y: hidden;
+			}
+			.textInput {
+				width: 10vh;
+				height: 5vh;
+				text-align: center;
+				font-size: 100%;
+				font-weight: bold;
+				caret-color: black;
+				margin-left: 1vw;
+				margin-right: 1vw;
+				margin-top: 1vh;
+				margin-bottom: 1vh;
+			}
+			.button {
+				width: 18vh;
+				height: 5vh;
+				text-align: center;
+				font-size: 100%;
+				margin-left: 1vw;
+				margin-right: 1vw;
+				margin-top: 1vh;
+				margin-bottom: 1vh;
+			}
+			.buttonBold {
+				width: 15vh;
+				height: 5vh;
+				text-align: center;
+				font-size: 100%;
+				font-weight: bold;
+				background-color: rgba(190, 230, 190, 1);
+				margin-left: 1vw;
+				margin-right: 1vw;
+				margin-top: 1vh;
+				margin-bottom: 1vh;
+			}
+			#optionGroup {
+				height: 30vh;
+				font-size: 100%;
+				overflow-x: scroll;
+				overflow-y: scroll;
+				margin-left: 1vw;
+				margin-right: 1vw;
+				margin-top: 1vh;
+				margin-bottom: 1vh;
+			}
+			#calcOutput {
+				height: 50vh;
+				font-size: 180%;
+				margin-left: 1vw;
+				margin-right: 1vw;
+				margin-top: 1vh;
+				margin-bottom: 10vh;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			총 수량 = <input id="totalNumTextInput" class="textInput" type="number"></input>
+			<button class="button" onclick="reset()">초기화</button>
+		</div>
+		<div>
+			<div id="optionGroup">
+				<button class="button" onclick="addOption()">옵션추가</button></div>
+			</div>
+		</div>
+		<div>
+			결과:
+		</div>
+		<div>
+			<div id="calcOutput"></div>
+		</div>
+
+		<script>
+			var viewport = document.querySelector("meta[name=viewport]");
+			viewport.setAttribute("content", "width=" + window.innerWidth + ", height=" + window.innerHeight + ", user-scalable=0");
+
+			const totalNumTextInput = document.getElementById("totalNumTextInput");
+			const optionGroup = document.getElementById("optionGroup");
+			const calcOutput = document.getElementById("calcOutput");
+
+			const optionList = [];
+
+			function addOption()
+			{
+				const newOptionIndex = optionList.length;
+
+				if (newOptionIndex > 19)
+				{
+					alert("옵션이 너무 많습니다!");
+					return;
+				}
+
+				const option = document.createElement("div");
+
+				const optionInput1 = document.createElement("input");
+				optionInput1.className = "textInput";
+				optionInput1.type = "number";
+				if (newOptionIndex > 0)
+				{
+					optionInput1.value = optionList[0].children[0].value;
+					optionInput1.disabled = true;
+				}
+				else
+				{
+					optionInput1.oninput = function() {
+						for (let i = 1; i < optionList.length; ++i)
+						{
+							optionList[i].children[0].value = optionList[0].children[0].value;
+						}
+					};
+				}
+				option.appendChild(optionInput1);
+
+				const optionMultSymbol = document.createElement("span");
+				optionMultSymbol.innerHTML = " x ";
+				option.appendChild(optionMultSymbol);
+
+				const optionInput2 = document.createElement("input");
+				optionInput2.className = "textInput";
+				optionInput2.type = "number";
+				option.appendChild(optionInput2);
+
+				if (newOptionIndex > 0)
+				{
+					const optionRemoveButton = document.createElement("button");
+					optionRemoveButton.className = "button";
+					optionRemoveButton.innerHTML = "옵션삭제";
+					optionRemoveButton.onclick = function() {
+						optionList.splice(newOptionIndex, 1)[0].remove();
+					};
+					option.appendChild(optionRemoveButton);
+				}
+				else
+				{
+					const calcButton = document.createElement("button");
+					calcButton.className = "buttonBold";
+					calcButton.innerHTML = "계산";
+					calcButton.onclick = function() {
+						calculate();
+					};
+					option.appendChild(calcButton);
+				}
+
+				optionGroup.appendChild(option);
+				optionGroup.insertBefore(option, optionGroup.childNodes[0] || null);
+				optionList.push(option);
+			}
+
+			function reset()
+			{
+				totalNumTextInput.value = "";
+				calcOutput.innerHTML = "";
+				const numOptions = optionList.length;
+				for (let i = numOptions-1; i >= 0; --i)
+					optionList.splice(i, 1)[0].remove();
+				addOption();
+			}
+
+			function calculate()
+			{
+				let n0 = 0;
+				let n1 = 0;
+				let sum = 0;
+
+				let outputText = "";
+				let totalNum = parseInt(totalNumTextInput.value);
+				let remainder = totalNum;
+
+				if (Number.isNaN(totalNum) || totalNum < 1 || totalNum > 9999)
+				{
+					outputText = "(오류) 잘못된 입력값입니다.";
+					calcOutput.innerHTML = outputText;
+					return;
+				}
+
+				const countByOptionIndex = new Array(optionList.length);
+				for (let i = 0; i < countByOptionIndex.length; ++i)
+					countByOptionIndex[i] = 0;
+
+				let trial = 10000; // infinite loop prevention
+				while (--trial > 0)
+				{
+					for (let i = optionList.length-1; i >= 0; --i)
+					{
+						const option = optionList[i];
+						n0 = parseInt(option.children[0].value);
+						n1 = parseInt(option.children[2].value);
+
+						if (Number.isNaN(n0) || Number.isNaN(n1) || n0 < 1 || n1 < 1 || n0 > 9999 || n1 > 9999)
+						{
+							outputText = "(오류) 잘못된 입력값입니다.";
+							calcOutput.innerHTML = outputText;
+							return;
+						}
+
+						const n = n0 * n1;
+						if (remainder < n)
+						{
+							trial = -9999;
+							break;
+						}
+						remainder -= n;
+						sum += 1;
+						++countByOptionIndex[i];
+
+						//outputText = `(${n0} x ${n1}) 세트 ${countByOptionIndex[i]}번째 --> 남은수량 = ${remainder}<br>` + outputText;
+					}
+				}
+
+				//outputText = `--------------<br>` + outputText;
+
+				const remainderDivider = Math.floor(remainder / n0);
+				const remainderIndivisible = remainder - remainderDivider*n0;
+
+				outputText += `<font color=yellow><b>${sum}</b></font> 빠레트<br>+ <font color=yellow><b>${remainder}</b></font> ( ${remainderDivider}단 + ${remainderIndivisible} )<br>`;
+				calcOutput.innerHTML = outputText;
+			}
+
+			addOption();
+		</script>
+	</body>
+</html>
