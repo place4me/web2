@@ -43,110 +43,119 @@
 			}
 			.textInput {
 				width: 18vw;
-				height: 8vh;
+				height: 6vh;
 				text-align: center;
 				font-size: 100%;
 				font-weight: bold;
 				caret-color: black;
 				margin-left: 1vw;
 				margin-right: 1vw;
-				margin-top: 1vh;
-				margin-bottom: 1vh;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
 			}
 			.textInput:focus {
 				border: 0.6vh solid rgb(148, 194, 220);
 			}
 			.textInputLong {
 				width: 23vw;
-				height: 8vh;
+				height: 6vh;
 				text-align: center;
 				font-size: 100%;
 				font-weight: bold;
 				caret-color: black;
 				margin-left: 1vw;
 				margin-right: 1vw;
-				margin-top: 1vh;
-				margin-bottom: 1vh;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
 			}
 			.textInputLong:focus {
 				border: 0.6vh solid rgb(148, 194, 220);
 			}
 			.label {
-				width: 18vw;
+				width: 16vw;
 				height: 8vh;
 				text-align: center;
 				font-size: 100%;
 				font-weight: bold;
-				margin-top: 1vh;
-				margin-bottom: 1vh;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
+			}
+			.labelHeavy {
+				width: 16vw;
+				height: 8vh;
+				text-align: center;
+				font-size: 120%;
+				font-weight: bold;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
 			}
 			.labelLong {
-				width: 23vw;
+				width: 20vw;
 				height: 8vh;
 				text-align: center;
 				font-size: 100%;
 				font-weight: bold;
-				margin-top: 1vh;
-				margin-bottom: 1vh;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
 			}
 			.button {
 				width: 25vw;
-				height: 10vh;
+				height: 7vh;
 				text-align: center;
 				font-size: 130%;
 				margin-left: 1vw;
 				margin-right: 1vw;
-				margin-top: 1vh;
-				margin-bottom: 1vh;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
 			}
 			.buttonShort {
 				width: 15vw;
-				height: 10vh;
+				height: 7vh;
 				text-align: center;
 				font-size: 100%;
 				margin-left: 1vw;
 				margin-right: 1vw;
-				margin-top: 1vh;
-				margin-bottom: 1vh;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
 			}
 			.buttonBold {
 				width: 25vw;
-				height: 10vh;
+				height: 7vh;
 				text-align: center;
 				font-size: 130%;
 				font-weight: bold;
 				background-color: rgba(190, 230, 190, 1);
 				margin-left: 1vw;
 				margin-right: 1vw;
-				margin-top: 1vh;
-				margin-bottom: 1vh;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
 			}
 			.redBackground {
 				background-color: rgba(230, 170, 170, 1);
 			}
 			#optionGroup {
 				width: 97vw;
-				height: 47vh;
+				height: 38vh;
 				text-align: center;
 				font-size: 100%;
 				overflow-x: scroll;
 				overflow-y: scroll;
 				margin-left: 1vw;
 				margin-right: 1vw;
-				margin-top: 1vh;
-				margin-bottom: 1vh;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
 			}
 			#outputGroup {
 				width: 97vw;
-				height: 47vh;
+				height: 60vh;
 				text-align: center;
 				font-size: 100%;
 				overflow-x: scroll;
 				overflow-y: scroll;
 				margin-left: 1vw;
 				margin-right: 1vw;
-				margin-top: 1vh;
-				margin-bottom: 1vh;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
 				background-color: rgba(100, 100, 100, 1);
 			}
 			::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -171,6 +180,10 @@
 				<button id="loadButton" class="button" onclick="load()">열기</button>
 			</div>
 			<div>
+				<span id="labelBL" class="labelHeavy">B/L</span>
+				<input id="inputBL" type="number" class="textInput"></input>
+			</div>
+			<div>
 				<button id="label1" class="label" disabled>코드</button>
 				<button id="label2" class="labelLong" disabled>C/T</button>
 				<button id="label3" class="labelLong" disabled>Kg</button>
@@ -191,6 +204,8 @@
 		<script>
 			let saveData = {};
 
+			let loading = false;
+			let bl = 0;
 			let weightUnit = "kg";
 
 			var viewport = document.querySelector("meta[name=viewport]");
@@ -210,6 +225,8 @@
 			const label2 = document.getElementById("label2");
 			const label3 = document.getElementById("label3");
 			const label4 = document.getElementById("label4");
+			const labelBL = document.getElementById("labelBL");
+			const inputBL = document.getElementById("inputBL");
 
 			removeButton.style.display = 'none';
 			addButton.style.display = 'none';
@@ -224,10 +241,12 @@
 
 			function load()
 			{
+				loading = true;
 				const dataStr = localStorage.getItem("sheetCalcSaveData");
 				if (dataStr != undefined && dataStr != null && dataStr != "")
 				{
 					saveData = JSON.parse(dataStr);
+					bl = saveData.bl;
 					weightUnit = saveData.weightUnit;
 					if (weightUnit == "kg")
 						toKg(false);
@@ -244,10 +263,12 @@
 						option.children[3].value = op.v4;
 					}
 				}
+				loading = false;
 			}
 
 			function save()
 			{
+				saveData.bl = Number.isNaN(bl) ? 0 : bl;
 				saveData.weightUnit = weightUnit;
 				saveData.optionList = [];
 				for (const option of optionList)
@@ -264,6 +285,8 @@
 
 			function toKg(addFirstOption = true)
 			{
+				if (!loading)
+					bl = parseInt(inputBL.value);
 				weightUnit = "kg";
 				label3.innerHTML = "kg";
 
@@ -279,12 +302,16 @@
 				toKgButton.style.display = 'none';
 				toLbButton.style.display = 'none';
 				loadButton.style.display = 'none';
+				labelBL.style.display = 'none';
+				inputBL.style.display = 'none';
 
 				if (addFirstOption)
 					addOption();
 			}
 			function toLb(addFirstOption = true)
 			{
+				if (!loading)
+					bl = parseInt(inputBL.value);
 				weightUnit = "lb";
 				label3.innerHTML = "lb";
 
@@ -300,6 +327,8 @@
 				toKgButton.style.display = 'none';
 				toLbButton.style.display = 'none';
 				loadButton.style.display = 'none';
+				labelBL.style.display = 'none';
+				inputBL.style.display = 'none';
 
 				if (addFirstOption)
 					addOption();
@@ -426,6 +455,12 @@
 					totalRow1.appendChild(colTotalV3Label2);
 				}
 
+				const colTotalBLLabel = document.createElement("td");
+				colTotalBLLabel.classList.add("big");
+				colTotalBLLabel.classList.add("tableCellHighlighted");
+				colTotalBLLabel.innerHTML = "B/L";
+				totalRow1.appendChild(colTotalBLLabel);
+
 				const totalRow2 = document.createElement("tr");
 				table1.appendChild(totalRow2);
 
@@ -449,6 +484,11 @@
 					colTotalV3_2.innerHTML = totalV3.toFixed(2);
 					totalRow2.appendChild(colTotalV3_2);
 				}
+
+				const colTotalBL = document.createElement("td");
+				colTotalBL.classList.add("big");
+				colTotalBL.innerHTML = bl.toString();
+				totalRow2.appendChild(colTotalBL);
 
 				const tableM = document.createElement("table");
 				outputGroup.appendChild(tableM);
