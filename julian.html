@@ -16,7 +16,6 @@
 				margin-top: 3vh;
 				margin-bottom: 3vh;
 				overflow-x: hidden;
-				overflow-y: hidden;
 				text-align: center;
 			}
 			.textInput {
@@ -61,6 +60,19 @@
 		<div>
 			<div id="calcOutput"></div>
 		</div>
+		<div>
+			<div style="font-size: 160%;">℃/℉ 변환</div>
+			<div>
+				<span><input id="cTemperature" class="textInput" type="number"></input></span>
+				<span style="font-size: 140%;">℃</span>
+			</div>
+			<div>
+				<span><input id="fTemperature" class="textInput" type="number"></input></span>
+				<span style="font-size: 140%;">℉</span>
+			</div>
+			<div><button class="button" onclick="convertCF()">℃를 ℉로</button></div>
+			<div><button class="button" onclick="convertFC()">℉를 ℃로</button></div>
+		</div>
 
 		<script>
 			var viewport = document.querySelector("meta[name=viewport]");
@@ -68,6 +80,19 @@
 
 			const textInput = document.getElementById("textInput");
 			const calcOutput = document.getElementById("calcOutput");
+			const ct = document.getElementById("cTemperature");
+			const ft = document.getElementById("fTemperature");
+
+			function convertCF()
+			{
+				const c = parseFloat(ct.value.trim());
+				ft.value = ((c * 9/5) + 32).toFixed(2).toString();
+			}
+			function convertFC()
+			{
+				const f = parseFloat(ft.value.trim());
+				ct.value = ((f - 32) * 5/9).toFixed(2).toString();
+			}
 
 			function calculate()
 			{
