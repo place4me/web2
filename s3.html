@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport">
+
+		<style>
+			.pageNum {
+				position: fixed;
+				left: 1vw;
+				top: 1vh;
+				width: 3vw;
+				hiehgt: 3vh;
+			}
+			body {
+				color: rgb(50, 50, 50);
+				width: 100%;
+				height: 100%;
+				text-align: center;
+				background-color: gray;
+				font-size: 300%;
+				overflow-x: hidden;
+				overflow-y: hidden;
+			}
+			table {
+				border: 3px double black;
+				text-align: center;
+				font-weight: bold;
+			}
+			tr {
+				border: 2px solid black;
+				width: 98vw;
+				height: 6vh;
+			}
+			td {
+				background-color: rgb(231, 225, 219);
+			}
+			td.small {
+				border: 2px solid black;
+				width: 20vw;
+				height: 6vh;
+			}
+			td.big {
+				border: 2px solid black;
+				width: 28vw;
+				height: 6vh;
+			}
+			td.tableCellHighlighted {
+				background-color: rgb(148, 194, 220);
+			}
+			.textInput {
+				width: 18vw;
+				height: 6vh;
+				text-align: center;
+				font-size: 100%;
+				font-weight: bold;
+				caret-color: black;
+				margin-left: 1vw;
+				margin-right: 1vw;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
+			}
+			.textInput:focus {
+				border: 0.6vh solid rgb(148, 194, 220);
+			}
+			.textInputLong {
+				width: 23vw;
+				height: 6vh;
+				text-align: center;
+				font-size: 100%;
+				font-weight: bold;
+				caret-color: black;
+				margin-left: 1vw;
+				margin-right: 1vw;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
+			}
+			.textInputLong:focus {
+				border: 0.6vh solid rgb(148, 194, 220);
+			}
+			.label {
+				width: 16vw;
+				height: 8vh;
+				text-align: center;
+				font-size: 100%;
+				font-weight: bold;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
+			}
+			.labelHeavy {
+				width: 16vw;
+				height: 8vh;
+				text-align: center;
+				font-size: 120%;
+				font-weight: bold;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
+			}
+			.labelLong {
+				width: 20vw;
+				height: 8vh;
+				text-align: center;
+				font-size: 100%;
+				font-weight: bold;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
+			}
+			.buttonLong {
+				width: 40vw;
+				height: 7vh;
+				text-align: center;
+				font-size: 130%;
+				margin-left: 1vw;
+				margin-right: 1vw;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
+			}
+			.button {
+				width: 25vw;
+				height: 7vh;
+				text-align: center;
+				font-size: 130%;
+				margin-left: 1vw;
+				margin-right: 1vw;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
+			}
+			.buttonShort {
+				width: 15vw;
+				height: 7vh;
+				text-align: center;
+				font-size: 100%;
+				margin-left: 1vw;
+				margin-right: 1vw;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
+			}
+			.buttonBold {
+				width: 25vw;
+				height: 7vh;
+				text-align: center;
+				font-size: 130%;
+				font-weight: bold;
+				background-color: rgba(190, 230, 190, 1);
+				margin-left: 1vw;
+				margin-right: 1vw;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
+			}
+			.redBackground {
+				background-color: rgba(230, 170, 170, 1);
+			}
+			.saveText {
+				width: 80vw;
+				height: 50vh;
+				text-align: center;
+				font-size: 100%;
+				margin-left: 1vw;
+				margin-right: 1vw;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
+			}
+			#optionGroup {
+				width: 97vw;
+				height: 38vh;
+				text-align: center;
+				font-size: 100%;
+				overflow-x: scroll;
+				overflow-y: scroll;
+				margin-left: 1vw;
+				margin-right: 1vw;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
+			}
+			#outputGroup {
+				width: 97vw;
+				height: 60vh;
+				text-align: center;
+				font-size: 100%;
+				overflow-x: scroll;
+				overflow-y: scroll;
+				margin-left: 1vw;
+				margin-right: 1vw;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
+				background-color: rgba(100, 100, 100, 1);
+			}
+			::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+				color: rgba(185, 185, 185, 1);
+				opacity: 1; /* Firefox */
+			}
+			:-ms-input-placeholder { /* Internet Explorer 10-11 */
+				color: rgba(185, 185, 185, 1);
+			}
+			::-ms-input-placeholder { /* Microsoft Edge */
+				color: rgba(185, 185, 185, 1);
+			}
+		</style>
+	</head>
+	<body>
+    <div class="pageNum">3</div>
+		<div id="optionGroup">
+			<div>
+				<button id="toKgButton" class="buttonBold" onclick="toKg()">kg</button>
+				<button id="toLbButton" class="buttonBold" onclick="toLb()">lb</button>
+			</div>
+			<div>
+				<button id="loadButton" class="button" onclick="load()">열기</button>
+				<button id="loadTextButton" class="buttonLong" onclick="loadText()">txt열기</button>
+			</div>
+			<div id="loadTextGroup">
+				<textarea id="loadTextArea" class="saveText"></textarea>
+				<div>
+					<button id="loadTextConfirmButton" class="button" onclick="loadTextConfirm()">확인</button>
+				</div>
+			</div>
+			<div>
+				<span id="labelBL" class="labelHeavy">B/L</span>
+				<input id="inputBL" type="text" class="textInput"></input>
+			</div>
+			<div>
+				<button id="label1" class="label" disabled>코드</button>
+				<button id="label2" class="labelLong" disabled>C/T</button>
+				<button id="label3" class="labelLong" disabled>Kg</button>
+				<button id="label4" class="label" disabled>EST</button>
+			</div>
+			<div id="buttonGroup">
+				<button id="removeButton" class="buttonShort redBackground" onclick="removeOption()">➖</button>
+				<span>&nbsp;</span>
+				<button id="addButton" class="buttonShort" onclick="addOption()">➕</button>
+				<span>&nbsp;&nbsp;&nbsp;</span>
+				<button id="saveButton" class="buttonShort" onclick="save()">저장</button>
+								<div id="saveTextGroup">
+					<textarea id="saveTextArea" class="saveText"></textarea>
+				</div>
+				<button id="saveTextButton" class="buttonLong" onclick="saveText()">txt저장</button>
+				<button id="calcButton" class="buttonBold" onclick="calculate()">계산</button>
+			</div>
+		</div>
+		<div id="outputGroup">
+		</div>
+
+		<script>
+			let saveData = {};
+			let saveTextData = {};
+
+			let loading = false;
+			let bl = "";
+			let weightUnit = "kg";
+
+			var viewport = document.querySelector("meta[name=viewport]");
+			viewport.setAttribute("content", "width=" + window.innerWidth + ", height=" + window.innerHeight + ", user-scalable=0");
+
+			const optionGroup = document.getElementById("optionGroup");
+			const buttonGroup = document.getElementById("buttonGroup");
+			const outputGroup = document.getElementById("outputGroup");
+			const loadTextGroup = document.getElementById("loadTextGroup");
+			const loadTextArea = document.getElementById("loadTextArea");
+			const saveTextGroup = document.getElementById("saveTextGroup");
+			const saveTextArea = document.getElementById("saveTextArea");
+			const removeButton = document.getElementById("removeButton");
+			const addButton = document.getElementById("addButton");
+			const calcButton = document.getElementById("calcButton");
+			const toKgButton = document.getElementById("toKgButton");
+			const toLbButton = document.getElementById("toLbButton");
+			const loadButton = document.getElementById("loadButton");
+			const loadTextButton = document.getElementById("loadTextButton");
+			const loadTextConfirmButton = document.getElementById("loadTextConfirmButton");
+			const saveButton = document.getElementById("saveButton");
+			const saveTextButton = document.getElementById("saveTextButton");
+			const label1 = document.getElementById("label1");
+			const label2 = document.getElementById("label2");
+			const label3 = document.getElementById("label3");
+			const label4 = document.getElementById("label4");
+			const labelBL = document.getElementById("labelBL");
+			const inputBL = document.getElementById("inputBL");
+
+			loadTextGroup.style.display = 'none';
+			saveTextGroup.style.display = 'none';
+
+			removeButton.style.display = 'none';
+			addButton.style.display = 'none';
+			calcButton.style.display = 'none';
+			saveButton.style.display = 'none';
+			saveTextButton.style.display = 'none';
+			label1.style.display = 'none';
+			label2.style.display = 'none';
+			label3.style.display = 'none';
+			label4.style.display = 'none';
+
+			const optionList = [];
+
+			function load()
+			{
+				loading = true;
+				const dataStr = localStorage.getItem("sheetCalcSaveData_3");
+				if (dataStr != undefined && dataStr != null && dataStr != "")
+				{
+					saveData = JSON.parse(dataStr);
+					bl = saveData.bl;
+					weightUnit = saveData.weightUnit;
+					if (weightUnit == "kg")
+						toKg(false);
+					else
+						toLb(false);
+
+					for (const op of saveData.optionList)
+					{
+						addOption();
+						const option = optionList[optionList.length-1];
+						option.children[0].value = op.v1;
+						option.children[1].value = op.v2;
+						option.children[2].value = op.v3;
+						option.children[3].value = op.v4;
+					}
+				}
+				loading = false;
+			}
+
+			function loadText()
+			{
+				loadTextGroup.style.display = 'block';
+			}
+
+			function loadTextConfirm()
+			{
+				loading = true;
+				const dataStr = loadTextArea.value;
+				if (dataStr != undefined && dataStr != null && dataStr != "")
+				{
+					loadTextGroup.style.display = 'none';
+					saveData = JSON.parse(dataStr);
+					bl = saveData.bl;
+					weightUnit = saveData.weightUnit;
+					if (weightUnit == "kg")
+						toKg(false);
+					else
+						toLb(false);
+
+					for (const op of saveData.optionList)
+					{
+						addOption();
+						const option = optionList[optionList.length-1];
+						option.children[0].value = op.v1;
+						option.children[1].value = op.v2;
+						option.children[2].value = op.v3;
+						option.children[3].value = op.v4;
+					}
+				}
+				loading = false;
+			}
+
+			function save()
+			{
+				saveData.bl = bl;
+				saveData.weightUnit = weightUnit;
+				saveData.optionList = [];
+				for (const option of optionList)
+				{
+					saveData.optionList.push({
+						v1: option.children[0].value,
+						v2: option.children[1].value,
+						v3: option.children[2].value,
+						v4: option.children[3].value,
+					});
+				}
+				localStorage.setItem("sheetCalcSaveData_3", JSON.stringify(saveData));
+			}
+
+			function saveText()
+			{
+				saveTextData.bl = bl;
+				saveTextData.weightUnit = weightUnit;
+				saveTextData.optionList = [];
+				for (const option of optionList)
+				{
+					saveTextData.optionList.push({
+						v1: option.children[0].value,
+						v2: option.children[1].value,
+						v3: option.children[2].value,
+						v4: option.children[3].value,
+					});
+				}
+				saveTextGroup.style.display = 'block';
+				saveTextArea.value = JSON.stringify(saveTextData);
+			}
+
+			function toKg(addFirstOption = true)
+			{
+				if (!loading)
+					bl = inputBL.value;
+				weightUnit = "kg";
+				label3.innerHTML = "kg";
+
+				removeButton.style.display = 'inline';
+				addButton.style.display = 'inline';
+				calcButton.style.display = 'inline';
+				saveButton.style.display = 'inline';
+				saveTextButton.style.display = 'inline';
+				label1.style.display = 'inline';
+				label2.style.display = 'inline';
+				label3.style.display = 'inline';
+				label4.style.display = 'inline';
+
+				toKgButton.style.display = 'none';
+				toLbButton.style.display = 'none';
+				loadButton.style.display = 'none';
+				loadTextButton.style.display = 'none';
+				loadTextGroup.style.display = 'none';
+				labelBL.style.display = 'none';
+				inputBL.style.display = 'none';
+
+				if (addFirstOption)
+					addOption();
+			}
+			function toLb(addFirstOption = true)
+			{
+				if (!loading)
+					bl = inputBL.value;
+				weightUnit = "lb";
+				label3.innerHTML = "lb";
+
+				removeButton.style.display = 'inline';
+				addButton.style.display = 'inline';
+				calcButton.style.display = 'inline';
+				saveButton.style.display = 'inline';
+				saveTextButton.style.display = 'inline';
+				label1.style.display = 'inline';
+				label2.style.display = 'inline';
+				label3.style.display = 'inline';
+				label4.style.display = 'inline';
+
+				toKgButton.style.display = 'none';
+				toLbButton.style.display = 'none';
+				loadButton.style.display = 'none';
+				loadTextButton.style.display = 'none';
+				loadTextGroup.style.display = 'none';
+				labelBL.style.display = 'none';
+				inputBL.style.display = 'none';
+
+				if (addFirstOption)
+					addOption();
+			}
+
+			function addOption()
+			{
+				const newOptionIndex = optionList.length;
+
+				if (newOptionIndex > 1000)
+				{
+					alert("옵션이 너무 많습니다!");
+					return;
+				}
+
+				const option = document.createElement("div");
+
+				const v1 = document.createElement("input");
+				v1.className = "textInput";
+				v1.setAttribute("placeholder", "코드");
+				v1.setAttribute("inputmode", "email");
+				v1.setAttribute("lang", "en");
+				v1.type = "text";
+				v1.oninput = function() { v1.value = v1.value.toUpperCase(); };
+				option.appendChild(v1);
+
+				const v2 = document.createElement("input");
+				v2.className = "textInputLong";
+				v2.setAttribute("placeholder", "C/T");
+				v2.type = "number";
+				v2.step = "1";
+				option.appendChild(v2);
+
+				const v3 = document.createElement("input");
+				v3.className = "textInputLong";
+				v3.setAttribute("placeholder", weightUnit);
+				v3.type = "number";
+				option.appendChild(v3);
+
+				const v4 = document.createElement("input");
+				v4.className = "textInput";
+				v4.setAttribute("placeholder", "EST");
+				v4.setAttribute("inputmode", "email");
+				v4.setAttribute("lang", "en");
+				v4.type = "text";
+				v4.oninput = function() { v4.value = v4.value.toUpperCase(); };
+				option.appendChild(v4);
+
+				optionGroup.appendChild(option);
+				optionList.push(option);
+
+				buttonGroup.remove();
+				optionGroup.appendChild(buttonGroup);
+
+				optionGroup.scrollTop = optionGroup.scrollHeight;
+			}
+
+			function removeOption()
+			{
+				if (optionList.length > 0)
+				{
+					optionList.splice(optionList.length-1, 1)[0].remove();
+					optionGroup.scrollTop = optionGroup.scrollHeight;
+				}
+			}
+
+			function calculate()
+			{
+				const optionMap = {};
+				let totalV2 = 0;
+				let totalV3 = 0;
+
+				for (let i = 0; i < optionList.length; ++i)
+				{
+					const option = optionList[i];
+					const v1 = option.children[0].value;
+					const v2 = parseInt(option.children[1].value);
+					const v3 = parseFloat(option.children[2].value);
+					const v4 = option.children[3].value;
+
+					if (Number.isNaN(v2) || Number.isNaN(v3))
+					{
+						alert("(오류) 잘못된 입력값입니다.");
+						return;
+					}
+					totalV2 += v2;
+					totalV3 += v3;
+
+					// Key1 = v1, Key2 = v4
+					if (optionMap[v1] == undefined)
+						optionMap[v1] = {};
+					if (optionMap[v1][v4] == undefined)
+						optionMap[v1][v4] = {sumV2: 0, sumV3: 0};
+
+					optionMap[v1][v4].sumV2 += v2;
+					optionMap[v1][v4].sumV3 += v3;
+				}
+
+				while (outputGroup.children != undefined && outputGroup.children != null && outputGroup.children.length > 0)
+					outputGroup.children[0].remove();
+
+				const table1 = document.createElement("table");
+				outputGroup.appendChild(table1);
+
+				const totalRow1 = document.createElement("tr");
+				table1.appendChild(totalRow1);
+				const colTotalV2Label = document.createElement("td");
+				colTotalV2Label.classList.add("big");
+				colTotalV2Label.classList.add("tableCellHighlighted");
+				colTotalV2Label.innerHTML = "C/T 합계";
+				totalRow1.appendChild(colTotalV2Label);
+				const colTotalV3Label = document.createElement("td");
+				colTotalV3Label.classList.add("big");
+				colTotalV3Label.classList.add("tableCellHighlighted");
+				colTotalV3Label.innerHTML = "kg 합계";
+				totalRow1.appendChild(colTotalV3Label);
+
+				if (weightUnit == "lb")
+				{
+					const colTotalV3Label2 = document.createElement("td");
+					colTotalV3Label2.classList.add("big");
+					colTotalV3Label2.classList.add("tableCellHighlighted");
+					colTotalV3Label2.innerHTML = "lb 합계";
+					totalRow1.appendChild(colTotalV3Label2);
+				}
+
+				const colTotalBLLabel = document.createElement("td");
+				colTotalBLLabel.classList.add("big");
+				colTotalBLLabel.classList.add("tableCellHighlighted");
+				colTotalBLLabel.innerHTML = "B/L";
+				totalRow1.appendChild(colTotalBLLabel);
+
+				const totalRow2 = document.createElement("tr");
+				table1.appendChild(totalRow2);
+
+				const colTotalV2 = document.createElement("td");
+				colTotalV2.classList.add("big");
+				colTotalV2.innerHTML = totalV2.toString();
+				totalRow2.appendChild(colTotalV2);
+
+				const colTotalV3 = document.createElement("td");
+				colTotalV3.classList.add("big");
+				if (weightUnit == "kg")
+					colTotalV3.innerHTML = totalV3.toFixed(2);
+				else
+					colTotalV3.innerHTML = (totalV3 * 0.453592).toFixed(2);
+				totalRow2.appendChild(colTotalV3);
+
+				if (weightUnit == "lb")
+				{
+					const colTotalV3_2 = document.createElement("td");
+					colTotalV3_2.classList.add("big");
+					colTotalV3_2.innerHTML = totalV3.toFixed(2);
+					totalRow2.appendChild(colTotalV3_2);
+				}
+
+				const colTotalBL = document.createElement("td");
+				colTotalBL.classList.add("big");
+				colTotalBL.innerHTML = bl;
+				totalRow2.appendChild(colTotalBL);
+
+				const tableM = document.createElement("table");
+				outputGroup.appendChild(tableM);
+
+				const rrr = document.createElement("tr");
+				tableM.appendChild(rrr);
+
+				const ccc1 = document.createElement("td");
+				ccc1.classList.add("tableCellHighlighted");
+				ccc1.classList.add("big");
+				ccc1.innerHTML = "코드";
+				rrr.appendChild(ccc1);
+
+				const ccc2 = document.createElement("td");
+				ccc2.classList.add("tableCellHighlighted");
+				ccc2.classList.add("big");
+				ccc2.innerHTML = "C/T 합계";
+				rrr.appendChild(ccc2);
+
+				const ccc3 = document.createElement("td");
+				ccc3.classList.add("tableCellHighlighted");
+				ccc3.classList.add("big");
+				ccc3.innerHTML = "kg 합계";
+				rrr.appendChild(ccc3);
+
+				for (const [v1, optionMapByV1] of Object.entries(optionMap))
+				{
+					const rr = document.createElement("tr");
+					tableM.appendChild(rr);
+
+					let v2Summed = 0;
+					let v3Summed = 0;
+					for (const [v4, optionInfo] of Object.entries(optionMapByV1))
+					{
+						v2Summed += optionInfo.sumV2;
+						v3Summed += optionInfo.sumV3;
+					}
+
+					const cc1 = document.createElement("td");
+					cc1.classList.add("big");
+					cc1.innerHTML = v1;
+					rr.appendChild(cc1);
+
+					const cc2 = document.createElement("td");
+					cc2.classList.add("big");
+					cc2.innerHTML = v2Summed;
+					rr.appendChild(cc2);
+
+					const cc3 = document.createElement("td");
+					cc3.classList.add("big");
+					if (weightUnit == "kg")
+						cc3.innerHTML = v3Summed.toFixed(2);
+					else
+						cc3.innerHTML = (v3Summed * 0.453592).toFixed(2);
+					rr.appendChild(cc3);
+				}
+
+				const table2 = document.createElement("table");
+				outputGroup.appendChild(table2);
+				const tbody = document.createElement("tbody");
+				table2.appendChild(tbody);
+
+				const titleRow = document.createElement("tr");
+				tbody.appendChild(titleRow);
+				const c1 = document.createElement("td");
+				c1.classList.add("tableCellHighlighted");
+				c1.classList.add("small");
+				c1.innerHTML = "코드";
+				titleRow.appendChild(c1);
+				const c4 = document.createElement("td");
+				c4.classList.add("tableCellHighlighted");
+				c4.classList.add("small");
+				c4.innerHTML = "EST";
+				titleRow.appendChild(c4);
+				const c2 = document.createElement("td");
+				c2.classList.add("tableCellHighlighted");
+				c2.classList.add("big");
+				c2.innerHTML = "C/T";
+				titleRow.appendChild(c2);
+				const c3 = document.createElement("td");
+				c3.classList.add("tableCellHighlighted");
+				c3.classList.add("big");
+				c3.innerHTML = "kg";
+				titleRow.appendChild(c3);
+
+				for (const [v1, optionMapByV1] of Object.entries(optionMap))
+				{
+					const row1 = document.createElement("tr");
+					tbody.appendChild(row1);
+
+					const col1 = document.createElement("td");
+					col1.setAttribute("rowspan", Object.keys(optionMapByV1).length);
+					col1.classList.add("small");
+					col1.innerHTML = v1;
+					row1.appendChild(col1);
+
+					let firstV4 = true;
+					for (const [v4, optionInfo] of Object.entries(optionMapByV1))
+					{
+						let colParent = row1;
+						if (!firstV4)
+						{
+							const row2 = document.createElement("tr");
+							tbody.appendChild(row2);
+							colParent = row2;
+						}
+
+						const col2 = document.createElement("td");
+						col2.classList.add("small");
+						col2.innerHTML = v4;
+						colParent.appendChild(col2);
+
+						const col3 = document.createElement("td");
+						col3.classList.add("big");
+						col3.innerHTML = optionInfo.sumV2;
+						colParent.appendChild(col3);
+
+						const col4 = document.createElement("td");
+						col4.classList.add("big");
+						if (weightUnit == "kg")
+							col4.innerHTML = optionInfo.sumV3.toFixed(2);
+						else
+							col4.innerHTML = (optionInfo.sumV3 * 0.453592).toFixed(2);
+						colParent.appendChild(col4);
+
+						if (firstV4)
+							firstV4 = false;
+					}
+				}
+
+				const spacer = document.createElement("div");
+				spacer.style = "height: 10vh; background-color: rgb(148, 194, 220);";
+				outputGroup.appendChild(spacer);
+
+				outputGroup.scrollTop = 0;
+			}
+		</script>
+	</body>
+</html>
