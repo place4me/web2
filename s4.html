@@ -150,16 +150,6 @@
 			.redBackground {
 				background-color: rgba(230, 170, 170, 1);
 			}
-			.saveText {
-				width: 80vw;
-				height: 50vh;
-				text-align: center;
-				font-size: 100%;
-				margin-left: 1vw;
-				margin-right: 1vw;
-				margin-top: 0.5vh;
-				margin-bottom: 0.5vh;
-			}
 			#optionGroup {
 				width: 97vw;
 				height: 38vh;
@@ -198,7 +188,7 @@
 		</style>
 	</head>
 	<body>
-    <div class="pageNum">4</div>
+    <div class="pageNum">1</div>
 		<div id="optionGroup">
 			<div>
 				<button id="toKgButton" class="buttonBold" onclick="toKg()">kg</button>
@@ -206,17 +196,10 @@
 			</div>
 			<div>
 				<button id="loadButton" class="button" onclick="load()">열기</button>
-				<button id="loadTextButton" class="buttonLong" onclick="loadText()">txt열기</button>
-			</div>
-			<div id="loadTextGroup">
-				<textarea id="loadTextArea" class="saveText"></textarea>
-				<div>
-					<button id="loadTextConfirmButton" class="button" onclick="loadTextConfirm()">확인</button>
-				</div>
 			</div>
 			<div>
 				<span id="labelBL" class="labelHeavy">B/L</span>
-				<input id="inputBL" type="text" class="textInput"></input>
+				<input id="inputBL" type="number" class="textInput"></input>
 			</div>
 			<div>
 				<button id="label1" class="label" disabled>코드</button>
@@ -230,10 +213,6 @@
 				<button id="addButton" class="buttonShort" onclick="addOption()">➕</button>
 				<span>&nbsp;&nbsp;&nbsp;</span>
 				<button id="saveButton" class="buttonShort" onclick="save()">저장</button>
-								<div id="saveTextGroup">
-					<textarea id="saveTextArea" class="saveText"></textarea>
-				</div>
-				<button id="saveTextButton" class="buttonLong" onclick="saveText()">txt저장</button>
 				<button id="calcButton" class="buttonBold" onclick="calculate()">계산</button>
 			</div>
 		</div>
@@ -242,7 +221,6 @@
 
 		<script>
 			let saveData = {};
-			let saveTextData = {};
 
 			let loading = false;
 			let bl = "";
@@ -254,20 +232,13 @@
 			const optionGroup = document.getElementById("optionGroup");
 			const buttonGroup = document.getElementById("buttonGroup");
 			const outputGroup = document.getElementById("outputGroup");
-			const loadTextGroup = document.getElementById("loadTextGroup");
-			const loadTextArea = document.getElementById("loadTextArea");
-			const saveTextGroup = document.getElementById("saveTextGroup");
-			const saveTextArea = document.getElementById("saveTextArea");
 			const removeButton = document.getElementById("removeButton");
 			const addButton = document.getElementById("addButton");
 			const calcButton = document.getElementById("calcButton");
 			const toKgButton = document.getElementById("toKgButton");
 			const toLbButton = document.getElementById("toLbButton");
 			const loadButton = document.getElementById("loadButton");
-			const loadTextButton = document.getElementById("loadTextButton");
-			const loadTextConfirmButton = document.getElementById("loadTextConfirmButton");
 			const saveButton = document.getElementById("saveButton");
-			const saveTextButton = document.getElementById("saveTextButton");
 			const label1 = document.getElementById("label1");
 			const label2 = document.getElementById("label2");
 			const label3 = document.getElementById("label3");
@@ -275,14 +246,10 @@
 			const labelBL = document.getElementById("labelBL");
 			const inputBL = document.getElementById("inputBL");
 
-			loadTextGroup.style.display = 'none';
-			saveTextGroup.style.display = 'none';
-
 			removeButton.style.display = 'none';
 			addButton.style.display = 'none';
 			calcButton.style.display = 'none';
 			saveButton.style.display = 'none';
-			saveTextButton.style.display = 'none';
 			label1.style.display = 'none';
 			label2.style.display = 'none';
 			label3.style.display = 'none';
@@ -296,39 +263,6 @@
 				const dataStr = localStorage.getItem("sheetCalcSaveData_4");
 				if (dataStr != undefined && dataStr != null && dataStr != "")
 				{
-					saveData = JSON.parse(dataStr);
-					bl = saveData.bl;
-					weightUnit = saveData.weightUnit;
-					if (weightUnit == "kg")
-						toKg(false);
-					else
-						toLb(false);
-
-					for (const op of saveData.optionList)
-					{
-						addOption();
-						const option = optionList[optionList.length-1];
-						option.children[0].value = op.v1;
-						option.children[1].value = op.v2;
-						option.children[2].value = op.v3;
-						option.children[3].value = op.v4;
-					}
-				}
-				loading = false;
-			}
-
-			function loadText()
-			{
-				loadTextGroup.style.display = 'block';
-			}
-
-			function loadTextConfirm()
-			{
-				loading = true;
-				const dataStr = loadTextArea.value;
-				if (dataStr != undefined && dataStr != null && dataStr != "")
-				{
-					loadTextGroup.style.display = 'none';
 					saveData = JSON.parse(dataStr);
 					bl = saveData.bl;
 					weightUnit = saveData.weightUnit;
@@ -367,24 +301,6 @@
 				localStorage.setItem("sheetCalcSaveData_4", JSON.stringify(saveData));
 			}
 
-			function saveText()
-			{
-				saveTextData.bl = bl;
-				saveTextData.weightUnit = weightUnit;
-				saveTextData.optionList = [];
-				for (const option of optionList)
-				{
-					saveTextData.optionList.push({
-						v1: option.children[0].value,
-						v2: option.children[1].value,
-						v3: option.children[2].value,
-						v4: option.children[3].value,
-					});
-				}
-				saveTextGroup.style.display = 'block';
-				saveTextArea.value = JSON.stringify(saveTextData);
-			}
-
 			function toKg(addFirstOption = true)
 			{
 				if (!loading)
@@ -396,7 +312,6 @@
 				addButton.style.display = 'inline';
 				calcButton.style.display = 'inline';
 				saveButton.style.display = 'inline';
-				saveTextButton.style.display = 'inline';
 				label1.style.display = 'inline';
 				label2.style.display = 'inline';
 				label3.style.display = 'inline';
@@ -405,8 +320,6 @@
 				toKgButton.style.display = 'none';
 				toLbButton.style.display = 'none';
 				loadButton.style.display = 'none';
-				loadTextButton.style.display = 'none';
-				loadTextGroup.style.display = 'none';
 				labelBL.style.display = 'none';
 				inputBL.style.display = 'none';
 
@@ -424,7 +337,6 @@
 				addButton.style.display = 'inline';
 				calcButton.style.display = 'inline';
 				saveButton.style.display = 'inline';
-				saveTextButton.style.display = 'inline';
 				label1.style.display = 'inline';
 				label2.style.display = 'inline';
 				label3.style.display = 'inline';
@@ -433,8 +345,6 @@
 				toKgButton.style.display = 'none';
 				toLbButton.style.display = 'none';
 				loadButton.style.display = 'none';
-				loadTextButton.style.display = 'none';
-				loadTextGroup.style.display = 'none';
 				labelBL.style.display = 'none';
 				inputBL.style.display = 'none';
 
