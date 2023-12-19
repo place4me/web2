@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<style>
+			body {
+				color: rgb(240, 240, 100);
+				width: 100%;
+				height: 100%;
+				background-color: rgb(60, 100, 20);
+				margin: 0vmin;
+				overflow-x: hidden;
+				text-align: center;
+				font-weight: bold;
+			}
+
+			.twoWayConverter {
+				width: 96vmin;
+				height: 11vmin;
+				font-size: 6vmin;
+			}
+			.twoWayConverter label {
+				display: inline-block;
+				width: 16vmin;
+				height: 9vmin;
+				margin: 1vmin;
+				font-size: 0.8em;
+			}
+			.twoWayConverter input {
+				display: inline-block;
+				width: 24vmin;
+				height: 9vmin;
+				font-weight: bold;
+				caret-color: black;
+				margin: 1vmin;
+				font-size: 0.8em;
+				border-radius: 3vmin;
+				background-color: rgb(180, 180, 150);
+			}
+			.twoWayConverter input:focus {
+				background-color: rgb(240, 240, 200);
+			}
+
+			.oneWayConverter {
+				width: 96vmin;
+				height: 30vmin;
+				font-size: 8vmin;
+			}
+			.oneWayConverter label {
+				display: inline-block;
+				width: 38vmin;
+				height: 11vmin;
+				margin: auto;
+				font-size: 0.8em;
+			}
+			.oneWayConverter input {
+				display: inline-block;
+				width: 35vmin;
+				height: 9vmin;
+				font-weight: bold;
+				caret-color: black;
+				margin: 1vmin;
+				font-size: 1em;
+				border-radius: 3vmin;
+				background-color: rgb(180, 180, 150);
+			}
+			.oneWayConverter input:focus {
+				background-color: rgb(240, 240, 200);
+			}
+			.oneWayConverter div {
+				display: block;
+				width: 96vmin;
+				height: 20vmin;
+				color: #c0c0c0;
+				margin: 1vmin;
+				font-size: 1em;
+			}
+
+			.button {
+				width: 50vmin;
+				height: 12vmin;
+				font-size: 8vmin;
+			}
+
+			.spacer {
+				display: block;
+				height: 5vmin;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="spacer"></div>
+
+		<div class="twoWayConverter">
+			<label>lb</label>
+			<input id="lbInput" type="number"></input>
+			<input id="kgInput" type="number"></input>
+			<label>kg</label>
+		</div>
+
+		<div class="spacer"></div>
+		<div class="spacer"></div>
+		<div class="spacer"></div>
+
+		<div class="twoWayConverter">
+			<label>D net</label>
+			<input id="dNetInput" type="number"></input>
+			<input id="dGrossInput" type="number"></input>
+			<label>D gross</label>
+		</div>
+		<div class="twoWayConverter">
+			<label>C net</label>
+			<input id="cNetInput" type="number"></input>
+			<input id="cGrossInput" type="number"></input>
+			<label>C gross</label>
+		</div>
+		<div class="twoWayConverter">
+			<label>S net</label>
+			<input id="netSumInput" type="number"></input>
+			<input id="grossSumInput" type="number"></input>
+			<label>S gross</label>
+		</div>
+
+		<div class="spacer"></div>
+		<div class="spacer"></div>
+		<div class="spacer"></div>
+
+		<div class="twoWayConverter">
+			<label>℃</label>
+			<input id="cInput" type="number"></input>
+			<input id="fInput" type="number"></input>
+			<label>℉</label>
+		</div>
+
+		<div class="spacer"></div>
+	</body>
+	<footer>
+		<script>
+			//------------------------------------------------------------------------
+			// lb, kg
+			//------------------------------------------------------------------------
+
+			const lbInput = document.getElementById("lbInput");
+			const kgInput = document.getElementById("kgInput");
+
+			lbInput.addEventListener("change", function() {
+				const lb = parseFloat(lbInput.value.trim());
+				kgInput.value = (lb * 0.453592).toFixed(4).toString();
+			});
+			kgInput.addEventListener("change", function() {
+				const kg = parseFloat(kgInput.value.trim());
+				lbInput.value = (kg * 2.204623).toFixed(4).toString();
+			});
+
+			//------------------------------------------------------------------------
+			// D, C, Net, Gross
+			//------------------------------------------------------------------------
+
+			const dNetInput = document.getElementById("dNetInput");
+			const dGrossInput = document.getElementById("dGrossInput");
+			const cNetInput = document.getElementById("cNetInput");
+			const cGrossInput = document.getElementById("cGrossInput");
+			const netSumInput = document.getElementById("netSumInput");
+			const grossSumInput = document.getElementById("grossSumInput");
+
+			const calcDC = function(changeTarget) {
+				let dNet = parseFloat(dNetInput.value.trim());
+				let dGross = parseFloat(dGrossInput.value.trim());
+				let cNet = parseFloat(cNetInput.value.trim());
+				let cGross = parseFloat(cGrossInput.value.trim());
+				let netSum = parseFloat(netSumInput.value.trim());
+				let grossSum = parseFloat(grossSumInput.value.trim());
+
+				if (Number.isNaN(dNet)) dNet = 0;
+				if (Number.isNaN(dGross)) dGross = 0;
+				if (Number.isNaN(cNet)) cNet = 0;
+				if (Number.isNaN(cGross)) cGross = 0;
+				if (Number.isNaN(netSum)) netSum = 0;
+				if (Number.isNaN(grossSum)) grossSum = 0;
+
+				if (changeTarget == "net" && dGross > 0 && cGross > 0 && netSum > 0) // compute dNet, cNet
+				{
+					grossSum = dGross + cGross;
+					dNet = netSum * (dGross / grossSum);
+					cNet = netSum * (cGross / grossSum);
+				}
+				else if (changeTarget == "gross" && dNet > 0 && cNet > 0 && grossSum > 0) // compute dGross, cGross
+				{
+					netSum = dNet + cNet;
+					dGross = grossSum * (dNet / netSum);
+					cGross = grossSum * (cNet / netSum);
+				}
+
+				dNetInput.value = dNet.toFixed(4);
+				dGrossInput.value = dGross.toFixed(4);
+				cNetInput.value = cNet.toFixed(4);
+				cGrossInput.value = cGross.toFixed(4);
+				netSumInput.value = netSum.toFixed(4);
+				grossSumInput.value = grossSum.toFixed(4);
+			};
+
+			dNetInput.addEventListener("change", function() { calcDC("gross"); });
+			dGrossInput.addEventListener("change", function() { calcDC("net"); });
+			cNetInput.addEventListener("change", function() { calcDC("gross"); });
+			cGrossInput.addEventListener("change", function() { calcDC("net"); });
+			netSumInput.addEventListener("change", function() { calcDC("net"); });
+			grossSumInput.addEventListener("change", function() { calcDC("gross"); });
+
+			//------------------------------------------------------------------------
+			// c, f
+			//------------------------------------------------------------------------
+
+			const cInput = document.getElementById("cInput");
+			const fInput = document.getElementById("fInput");
+
+			cInput.addEventListener("change", function() {
+				const c = parseFloat(cInput.value.trim());
+				fInput.value = ((c * 9/5) + 32).toFixed(4).toString();
+			});
+			fInput.addEventListener("change", function() {
+				const f = parseFloat(fInput.value.trim());
+				cInput.value = ((f - 32) * 5/9).toFixed(4).toString();
+			});
+		</script>
+	</footer>
+</html>
