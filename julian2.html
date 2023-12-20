@@ -145,11 +145,11 @@
 
 			lbInput.addEventListener("change", function() {
 				const lb = parseFloat(lbInput.value.trim());
-				kgInput.value = (lb * 0.453592).toFixed(4).toString();
+				kgInput.value = (lb * 0.453592).toFixed(2).toString();
 			});
 			kgInput.addEventListener("change", function() {
 				const kg = parseFloat(kgInput.value.trim());
-				lbInput.value = (kg * 2.204623).toFixed(4).toString();
+				lbInput.value = (kg * 2.204623).toFixed(2).toString();
 			});
 
 			//------------------------------------------------------------------------
@@ -191,12 +191,12 @@
 					cGross = grossSum * (cNet / netSum);
 				}
 
-				dNetInput.value = (dNet <= 0) ? "" : dNet.toFixed(4);
-				dGrossInput.value = (dGross <= 0) ? "" : dGross.toFixed(4);
-				cNetInput.value = (cNet <= 0) ? "" : cNet.toFixed(4);
-				cGrossInput.value = (cGross <= 0) ? "" : cGross.toFixed(4);
-				netSumInput.value = (netSum <= 0) ? "" : netSum.toFixed(4);
-				grossSumInput.value = (grossSum <= 0) ? "" : grossSum.toFixed(4);
+				dNetInput.value = (dNet <= 0) ? "" : dNet.toFixed(2);
+				dGrossInput.value = (dGross <= 0) ? "" : dGross.toFixed(2);
+				cNetInput.value = (cNet <= 0) ? "" : cNet.toFixed(2);
+				cGrossInput.value = (cGross <= 0) ? "" : cGross.toFixed(2);
+				netSumInput.value = (netSum <= 0) ? "" : netSum.toFixed(2);
+				grossSumInput.value = (grossSum <= 0) ? "" : grossSum.toFixed(2);
 			};
 
 			dNetInput.addEventListener("change", function() { calcDC("gross"); });
@@ -215,11 +215,11 @@
 
 			cInput.addEventListener("change", function() {
 				const c = parseFloat(cInput.value.trim());
-				fInput.value = ((c * 9/5) + 32).toFixed(4).toString();
+				fInput.value = ((c * 9/5) + 32).toFixed(2).toString();
 			});
 			fInput.addEventListener("change", function() {
 				const f = parseFloat(fInput.value.trim());
-				cInput.value = ((f - 32) * 5/9).toFixed(4).toString();
+				cInput.value = ((f - 32) * 5/9).toFixed(2).toString();
 			});
 		</script>
 	</footer>
