@@ -37,19 +37,39 @@
 			}
 			td.small {
 				border: 2px solid black;
+				width: 15vw;
+				height: 6vh;
+			}
+			td.medium {
+				border: 2px solid black;
 				width: 20vw;
 				height: 6vh;
 			}
 			td.big {
 				border: 2px solid black;
-				width: 28vw;
+				width: 24vw;
 				height: 6vh;
 			}
 			td.tableCellHighlighted {
 				background-color: rgb(148, 194, 220);
 			}
 			.textInput {
-				width: 13vw;
+				width: 15vw;
+				height: 6vh;
+				text-align: center;
+				font-size: 100%;
+				font-weight: bold;
+				caret-color: black;
+				margin-left: 0.5vw;
+				margin-right: 0.5vw;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
+			}
+			.textInput:focus {
+				border: 0.6vh solid rgb(148, 194, 220);
+			}
+			.textInputMedium {
+				width: 20vw;
 				height: 6vh;
 				text-align: center;
 				font-size: 100%;
@@ -64,7 +84,7 @@
 				border: 0.6vh solid rgb(148, 194, 220);
 			}
 			.textInputLong {
-				width: 20vw;
+				width: 24vw;
 				height: 6vh;
 				text-align: center;
 				font-size: 100%;
@@ -79,7 +99,7 @@
 				border: 0.6vh solid rgb(148, 194, 220);
 			}
 			.label {
-				width: 16vw;
+				width: 15vw;
 				height: 8vh;
 				text-align: center;
 				font-size: 100%;
@@ -88,7 +108,7 @@
 				margin-bottom: 0.5vh;
 			}
 			.labelHeavy {
-				width: 16vw;
+				width: 15vw;
 				height: 8vh;
 				text-align: center;
 				font-size: 120%;
@@ -96,8 +116,17 @@
 				margin-top: 0.5vh;
 				margin-bottom: 0.5vh;
 			}
-			.labelLong {
+			.labelMedium {
 				width: 20vw;
+				height: 8vh;
+				text-align: center;
+				font-size: 100%;
+				font-weight: bold;
+				margin-top: 0.5vh;
+				margin-bottom: 0.5vh;
+			}
+			.labelLong {
+				width: 24vw;
 				height: 8vh;
 				text-align: center;
 				font-size: 100%;
@@ -203,10 +232,9 @@
 			</div>
 			<div>
 				<button id="label1" class="label" disabled>코드</button>
-				<button id="label2" class="labelLong" disabled>C/T</button>
+				<button id="label2" class="labelMedium" disabled>C/T</button>
 				<button id="label3" class="labelLong" disabled>Net kg</button>
 				<button id="label4" class="labelLong" disabled>Grs kg</button>
-				<button id="label5" class="label" disabled>EST</button>
 			</div>
 			<div id="buttonGroup">
 				<button id="removeButton" class="buttonShort redBackground" onclick="removeOption()">➖</button>
@@ -244,7 +272,6 @@
 			const label2 = document.getElementById("label2");
 			const label3 = document.getElementById("label3");
 			const label4 = document.getElementById("label4");
-			const label5 = document.getElementById("label5");
 			const labelBL = document.getElementById("labelBL");
 			const inputBL = document.getElementById("inputBL");
 
@@ -256,14 +283,13 @@
 			label2.style.display = 'none';
 			label3.style.display = 'none';
 			label4.style.display = 'none';
-			label5.style.display = 'none';
 
 			const optionList = [];
 
 			function load()
 			{
 				loading = true;
-				const dataStr = localStorage.getItem("sheetCalcGrossSaveData_1");
+				const dataStr = localStorage.getItem("sheetCalcGrsSaveData_1");
 				if (dataStr != undefined && dataStr != null && dataStr != "")
 				{
 					saveData = JSON.parse(dataStr);
@@ -282,7 +308,6 @@
 						option.children[1].value = op.v2;
 						option.children[2].value = op.v3;
 						option.children[3].value = op.v4;
-						option.children[4].value = op.v5;
 					}
 				}
 				loading = false;
@@ -300,10 +325,9 @@
 						v2: option.children[1].value,
 						v3: option.children[2].value,
 						v4: option.children[3].value,
-						v5: option.children[4].value,
 					});
 				}
-				localStorage.setItem("sheetCalcGrossSaveData_1", JSON.stringify(saveData));
+				localStorage.setItem("sheetCalcGrsSaveData_1", JSON.stringify(saveData));
 			}
 
 			function toKg(addFirstOption = true)
@@ -322,7 +346,6 @@
 				label2.style.display = 'inline';
 				label3.style.display = 'inline';
 				label4.style.display = 'inline';
-				label5.style.display = 'inline';
 
 				toKgButton.style.display = 'none';
 				toLbButton.style.display = 'none';
@@ -349,7 +372,6 @@
 				label2.style.display = 'inline';
 				label3.style.display = 'inline';
 				label4.style.display = 'inline';
-				label5.style.display = 'inline';
 
 				toKgButton.style.display = 'none';
 				toLbButton.style.display = 'none';
@@ -383,7 +405,7 @@
 				option.appendChild(v1);
 
 				const v2 = document.createElement("input");
-				v2.className = "textInputLong";
+				v2.className = "textInputMedium";
 				v2.setAttribute("placeholder", "C/T");
 				v2.type = "number";
 				v2.step = "1";
@@ -400,15 +422,6 @@
 				v4.setAttribute("placeholder", "Grs " + weightUnit);
 				v4.type = "number";
 				option.appendChild(v4);
-
-				const v5 = document.createElement("input");
-				v5.className = "textInput";
-				v5.setAttribute("placeholder", "EST");
-				v5.setAttribute("inputmode", "email");
-				v5.setAttribute("lang", "en");
-				v5.type = "text";
-				v5.oninput = function() { v5.value = v5.value.toUpperCase(); };
-				option.appendChild(v5);
 
 				optionGroup.appendChild(option);
 				optionList.push(option);
@@ -442,7 +455,6 @@
 					const v2 = parseInt(option.children[1].value);
 					const v3 = parseFloat(option.children[2].value);
 					const v4 = parseFloat(option.children[3].value);
-					const v5 = option.children[4].value;
 
 					if (Number.isNaN(v2) || Number.isNaN(v3) || Number.isNaN(v4))
 					{
@@ -453,54 +465,26 @@
 					totalV3 += v3;
 					totalV4 += v4;
 
-					// Key1 = v1, Key2 = v5
 					if (optionMap[v1] == undefined)
-						optionMap[v1] = {};
-					if (optionMap[v1][v5] == undefined)
-						optionMap[v1][v5] = {sumV2: 0, sumV3: 0, sumV4: 0};
+						optionMap[v1] = {sumV2: 0, sumV3: 0, sumV4: 0};
 
-					optionMap[v1][v5].sumV2 += v2;
-					optionMap[v1][v5].sumV3 += v3;
-					optionMap[v1][v5].sumV4 += v4;
+					optionMap[v1].sumV2 += v2;
+					optionMap[v1].sumV3 += v3;
+					optionMap[v1].sumV4 += v4;
 				}
 
 				while (outputGroup.children != undefined && outputGroup.children != null && outputGroup.children.length > 0)
 					outputGroup.children[0].remove();
+
+				//-----------------------------------------------------------------
+				// Total Sum Table
+				//-----------------------------------------------------------------
 
 				const table1 = document.createElement("table");
 				outputGroup.appendChild(table1);
 
 				const totalRow1 = document.createElement("tr");
 				table1.appendChild(totalRow1);
-				const colTotalV2Label = document.createElement("td");
-				colTotalV2Label.classList.add("big");
-				colTotalV2Label.classList.add("tableCellHighlighted");
-				colTotalV2Label.innerHTML = "C/T 합";
-				totalRow1.appendChild(colTotalV2Label);
-				const colTotalV3Label = document.createElement("td");
-				colTotalV3Label.classList.add("big");
-				colTotalV3Label.classList.add("tableCellHighlighted");
-				colTotalV3Label.innerHTML = "Net kg 합";
-				totalRow1.appendChild(colTotalV3Label);
-				const colTotalV4Label = document.createElement("td");
-				colTotalV4Label.classList.add("big");
-				colTotalV4Label.classList.add("tableCellHighlighted");
-				colTotalV4Label.innerHTML = "Grs kg 합";
-				totalRow1.appendChild(colTotalV4Label);
-
-				if (weightUnit == "lb")
-				{
-					const colTotalV3Label2 = document.createElement("td");
-					colTotalV3Label2.classList.add("big");
-					colTotalV3Label2.classList.add("tableCellHighlighted");
-					colTotalV3Label2.innerHTML = "Net lb 합";
-					totalRow1.appendChild(colTotalV3Label2);
-					const colTotalV4Label2 = document.createElement("td");
-					colTotalV4Label2.classList.add("big");
-					colTotalV4Label2.classList.add("tableCellHighlighted");
-					colTotalV4Label2.innerHTML = "Grs lb 합";
-					totalRow1.appendChild(colTotalV4Label2);
-				}
 
 				const colTotalBLLabel = document.createElement("td");
 				colTotalBLLabel.classList.add("big");
@@ -508,119 +492,81 @@
 				colTotalBLLabel.innerHTML = "B/L";
 				totalRow1.appendChild(colTotalBLLabel);
 
-				const totalRow2 = document.createElement("tr");
-				table1.appendChild(totalRow2);
-
-				const colTotalV2 = document.createElement("td");
-				colTotalV2.classList.add("big");
-				colTotalV2.innerHTML = totalV2.toString();
-				totalRow2.appendChild(colTotalV2);
-
-				const colTotalV3 = document.createElement("td");
-				colTotalV3.classList.add("big");
-				if (weightUnit == "kg")
-					colTotalV3.innerHTML = totalV3.toFixed(2);
-				else
-					colTotalV3.innerHTML = (totalV3 * 0.453592).toFixed(2);
-				totalRow2.appendChild(colTotalV3);
-
-				const colTotalV4 = document.createElement("td");
-				colTotalV4.classList.add("big");
-				if (weightUnit == "kg")
-					colTotalV4.innerHTML = totalV4.toFixed(2);
-				else
-					colTotalV4.innerHTML = (totalV4 * 0.453592).toFixed(2);
-				totalRow2.appendChild(colTotalV4);
+				const colTotalV2Label = document.createElement("td");
+				colTotalV2Label.classList.add("medium");
+				colTotalV2Label.classList.add("tableCellHighlighted");
+				colTotalV2Label.innerHTML = "C/T";
+				totalRow1.appendChild(colTotalV2Label);
+				const colTotalV3Label = document.createElement("td");
+				colTotalV3Label.classList.add("big");
+				colTotalV3Label.classList.add("tableCellHighlighted");
+				colTotalV3Label.innerHTML = "Net kg";
+				totalRow1.appendChild(colTotalV3Label);
+				const colTotalV4Label = document.createElement("td");
+				colTotalV4Label.classList.add("big");
+				colTotalV4Label.classList.add("tableCellHighlighted");
+				colTotalV4Label.innerHTML = "Grs kg";
+				totalRow1.appendChild(colTotalV4Label);
 
 				if (weightUnit == "lb")
 				{
-					const colTotalV3_2 = document.createElement("td");
-					colTotalV3_2.classList.add("big");
-					colTotalV3_2.innerHTML = totalV3.toFixed(2);
-					totalRow2.appendChild(colTotalV3_2);
-
-					const colTotalV4_2 = document.createElement("td");
-					colTotalV4_2.classList.add("big");
-					colTotalV4_2.innerHTML = totalV4.toFixed(2);
-					totalRow2.appendChild(colTotalV4_2);
+					const colTotalV3Label2 = document.createElement("td");
+					colTotalV3Label2.classList.add("big");
+					colTotalV3Label2.classList.add("tableCellHighlighted");
+					colTotalV3Label2.innerHTML = "Net lb";
+					totalRow1.appendChild(colTotalV3Label2);
+					const colTotalV4Label2 = document.createElement("td");
+					colTotalV4Label2.classList.add("big");
+					colTotalV4Label2.classList.add("tableCellHighlighted");
+					colTotalV4Label2.innerHTML = "Grs lb";
+					totalRow1.appendChild(colTotalV4Label2);
 				}
+
+				const totalRow2 = document.createElement("tr");
+				table1.appendChild(totalRow2);
 
 				const colTotalBL = document.createElement("td");
 				colTotalBL.classList.add("big");
 				colTotalBL.innerHTML = bl;
 				totalRow2.appendChild(colTotalBL);
 
-				const tableM = document.createElement("table");
-				outputGroup.appendChild(tableM);
+				const colTotalV2 = document.createElement("td");
+				colTotalV2.classList.add("medium");
+				colTotalV2.innerHTML = totalV2.toString();
+				totalRow2.appendChild(colTotalV2);
 
-				const rrr = document.createElement("tr");
-				tableM.appendChild(rrr);
+				const colTotalV3 = document.createElement("td");
+				colTotalV3.classList.add("big");
+				if (weightUnit == "kg")
+					colTotalV3.innerHTML = totalV3.toFixed(3);
+				else
+					colTotalV3.innerHTML = (totalV3 * 0.453592).toFixed(3);
+				totalRow2.appendChild(colTotalV3);
 
-				const ccc1 = document.createElement("td");
-				ccc1.classList.add("tableCellHighlighted");
-				ccc1.classList.add("big");
-				ccc1.innerHTML = "코드";
-				rrr.appendChild(ccc1);
+				const colTotalV4 = document.createElement("td");
+				colTotalV4.classList.add("big");
+				if (weightUnit == "kg")
+					colTotalV4.innerHTML = totalV4.toFixed(3);
+				else
+					colTotalV4.innerHTML = (totalV4 * 0.453592).toFixed(3);
+				totalRow2.appendChild(colTotalV4);
 
-				const ccc2 = document.createElement("td");
-				ccc2.classList.add("tableCellHighlighted");
-				ccc2.classList.add("big");
-				ccc2.innerHTML = "C/T 합";
-				rrr.appendChild(ccc2);
-
-				const ccc3 = document.createElement("td");
-				ccc3.classList.add("tableCellHighlighted");
-				ccc3.classList.add("big");
-				ccc3.innerHTML = "Net kg 합";
-				rrr.appendChild(ccc3);
-
-				const ccc4 = document.createElement("td");
-				ccc4.classList.add("tableCellHighlighted");
-				ccc4.classList.add("big");
-				ccc4.innerHTML = "Grs kg 합";
-				rrr.appendChild(ccc4);
-
-				for (const [v1, optionMapByV1] of Object.entries(optionMap))
+				if (weightUnit == "lb")
 				{
-					const rr = document.createElement("tr");
-					tableM.appendChild(rr);
+					const colTotalV3_2 = document.createElement("td");
+					colTotalV3_2.classList.add("big");
+					colTotalV3_2.innerHTML = totalV3.toFixed(3);
+					totalRow2.appendChild(colTotalV3_2);
 
-					let v2Summed = 0;
-					let v3Summed = 0;
-					let v4Summed = 0;
-					for (const [v5, optionInfo] of Object.entries(optionMapByV1))
-					{
-						v2Summed += optionInfo.sumV2;
-						v3Summed += optionInfo.sumV3;
-						v4Summed += optionInfo.sumV4;
-					}
-
-					const cc1 = document.createElement("td");
-					cc1.classList.add("big");
-					cc1.innerHTML = v1;
-					rr.appendChild(cc1);
-
-					const cc2 = document.createElement("td");
-					cc2.classList.add("big");
-					cc2.innerHTML = v2Summed;
-					rr.appendChild(cc2);
-
-					const cc3 = document.createElement("td");
-					cc3.classList.add("big");
-					if (weightUnit == "kg")
-						cc3.innerHTML = v3Summed.toFixed(2);
-					else
-						cc3.innerHTML = (v3Summed * 0.453592).toFixed(2);
-					rr.appendChild(cc3);
-
-					const cc4 = document.createElement("td");
-					cc4.classList.add("big");
-					if (weightUnit == "kg")
-						cc4.innerHTML = v4Summed.toFixed(2);
-					else
-						cc4.innerHTML = (v4Summed * 0.453592).toFixed(2);
-					rr.appendChild(cc4);
+					const colTotalV4_2 = document.createElement("td");
+					colTotalV4_2.classList.add("big");
+					colTotalV4_2.innerHTML = totalV4.toFixed(3);
+					totalRow2.appendChild(colTotalV4_2);
 				}
+
+				//-----------------------------------------------------------------
+				// Per-Code Sum Table
+				//-----------------------------------------------------------------
 
 				const table2 = document.createElement("table");
 				outputGroup.appendChild(table2);
@@ -634,16 +580,12 @@
 				c1.classList.add("small");
 				c1.innerHTML = "코드";
 				titleRow.appendChild(c1);
-				const c5 = document.createElement("td");
-				c5.classList.add("tableCellHighlighted");
-				c5.classList.add("small");
-				c5.innerHTML = "EST";
-				titleRow.appendChild(c5);
 				const c2 = document.createElement("td");
 				c2.classList.add("tableCellHighlighted");
-				c2.classList.add("big");
+				c2.classList.add("medium");
 				c2.innerHTML = "C/T";
 				titleRow.appendChild(c2);
+
 				const c3 = document.createElement("td");
 				c3.classList.add("tableCellHighlighted");
 				c3.classList.add("big");
@@ -655,57 +597,63 @@
 				c4.innerHTML = "Grs kg";
 				titleRow.appendChild(c4);
 
-				for (const [v1, optionMapByV1] of Object.entries(optionMap))
+				const c5 = document.createElement("td");
+				c5.classList.add("tableCellHighlighted");
+				c5.classList.add("big");
+				c5.innerHTML = "Net lb";
+				titleRow.appendChild(c5);
+				const c6 = document.createElement("td");
+				c6.classList.add("tableCellHighlighted");
+				c6.classList.add("big");
+				c6.innerHTML = "Grs lb";
+				titleRow.appendChild(c6);
+
+				for (const [v1, optionInfo] of Object.entries(optionMap))
 				{
 					const row1 = document.createElement("tr");
 					tbody.appendChild(row1);
 
 					const col1 = document.createElement("td");
-					col1.setAttribute("rowspan", Object.keys(optionMapByV1).length);
 					col1.classList.add("small");
 					col1.innerHTML = v1;
 					row1.appendChild(col1);
 
-					let firstV5 = true;
-					for (const [v5, optionInfo] of Object.entries(optionMapByV1))
-					{
-						let colParent = row1;
-						if (!firstV5)
-						{
-							const row2 = document.createElement("tr");
-							tbody.appendChild(row2);
-							colParent = row2;
-						}
+					const col2 = document.createElement("td");
+					col2.classList.add("medium");
+					col2.innerHTML = optionInfo.sumV2;
+					row1.appendChild(col2);
 
-						const col2 = document.createElement("td");
-						col2.classList.add("small");
-						col2.innerHTML = v5;
-						colParent.appendChild(col2);
+					const col3 = document.createElement("td");
+					col3.classList.add("big");
+					if (weightUnit == "kg")
+						col3.innerHTML = optionInfo.sumV3.toFixed(3);
+					else
+						col3.innerHTML = (optionInfo.sumV3 * 0.453592).toFixed(3);
+					row1.appendChild(col3);
 
-						const col3 = document.createElement("td");
-						col3.classList.add("big");
-						col3.innerHTML = optionInfo.sumV2;
-						colParent.appendChild(col3);
+					const col4 = document.createElement("td");
+					col4.classList.add("big");
+					if (weightUnit == "kg")
+						col4.innerHTML = optionInfo.sumV4.toFixed(3);
+					else
+						col4.innerHTML = (optionInfo.sumV4 * 0.453592).toFixed(3);
+					row1.appendChild(col4);
 
-						const col4 = document.createElement("td");
-						col4.classList.add("big");
-						if (weightUnit == "kg")
-							col4.innerHTML = optionInfo.sumV3.toFixed(2);
-						else
-							col4.innerHTML = (optionInfo.sumV3 * 0.453592).toFixed(2);
-						colParent.appendChild(col4);
+					const col5 = document.createElement("td");
+					col5.classList.add("big");
+					if (weightUnit == "kg")
+						col5.innerHTML = (optionInfo.sumV3 / 0.453592).toFixed(3);
+					else
+						col5.innerHTML = optionInfo.sumV3.toFixed(3);
+					row1.appendChild(col5);
 
-						const col5 = document.createElement("td");
-						col5.classList.add("big");
-						if (weightUnit == "kg")
-							col5.innerHTML = optionInfo.sumV4.toFixed(2);
-						else
-							col5.innerHTML = (optionInfo.sumV4 * 0.453592).toFixed(2);
-						colParent.appendChild(col5);
-
-						if (firstV5)
-							firstV5 = false;
-					}
+					const col6 = document.createElement("td");
+					col6.classList.add("big");
+					if (weightUnit == "kg")
+						col6.innerHTML = (optionInfo.sumV4 / 0.453592).toFixed(3);
+					else
+						col6.innerHTML = optionInfo.sumV4.toFixed(3);
+					row1.appendChild(col6);
 				}
 
 				const spacer = document.createElement("div");
