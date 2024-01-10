@@ -191,12 +191,12 @@
 					cGross = grossSum * (cNet / netSum);
 				}
 
-				dNetInput.value = (dNet <= 0) ? "" : dNet.toFixed(2);
-				dGrossInput.value = (dGross <= 0) ? "" : dGross.toFixed(2);
-				cNetInput.value = (cNet <= 0) ? "" : cNet.toFixed(2);
-				cGrossInput.value = (cGross <= 0) ? "" : cGross.toFixed(2);
-				netSumInput.value = (netSum <= 0) ? "" : netSum.toFixed(2);
-				grossSumInput.value = (grossSum <= 0) ? "" : grossSum.toFixed(2);
+				dNetInput.value = (dNet <= 0) ? "" : dNet.toFixed(3);
+				dGrossInput.value = (dGross <= 0) ? "" : dGross.toFixed(3);
+				cNetInput.value = (cNet <= 0) ? "" : cNet.toFixed(3);
+				cGrossInput.value = (cGross <= 0) ? "" : cGross.toFixed(3);
+				netSumInput.value = (netSum <= 0) ? "" : netSum.toFixed(3);
+				grossSumInput.value = (grossSum <= 0) ? "" : grossSum.toFixed(3);
 			};
 
 			dNetInput.addEventListener("change", function() { calcDC("gross"); });
