@@ -609,7 +609,8 @@
 				c6.innerHTML = "Grs lb";
 				titleRow.appendChild(c6);
 
-				for (const [v1, optionInfo] of Object.entries(optionMap))
+				const sorted = Object.entries(optionMap).sort((kvp1, kvp2) => kvp1[0] < kvp2[0] ? -1 : 1);
+				for (const [v1, optionInfo] of sorted)
 				{
 					const row1 = document.createElement("tr");
 					tbody.appendChild(row1);
