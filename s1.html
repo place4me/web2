@@ -532,14 +532,16 @@
 				ccc3.innerHTML = "kg 합계";
 				rrr.appendChild(ccc3);
 
-				for (const [v1, optionMapByV1] of Object.entries(optionMap))
+				const sorted = Object.entries(optionMap).sort((kvp1, kvp2) => kvp1[0] < kvp2[0] ? -1 : 1);
+				for (const [v1, optionMapByV1] of sorted)
 				{
 					const rr = document.createElement("tr");
 					tableM.appendChild(rr);
 
 					let v2Summed = 0;
 					let v3Summed = 0;
-					for (const [v4, optionInfo] of Object.entries(optionMapByV1))
+					const sorted2 = Object.entries(optionMapByV1).sort((kvp1, kvp2) => kvp1[0] < kvp2[0] ? -1 : 1);
+					for (const [v4, optionInfo] of sorted2)
 					{
 						v2Summed += optionInfo.sumV2;
 						v3Summed += optionInfo.sumV3;
@@ -592,7 +594,8 @@
 				c3.innerHTML = "kg";
 				titleRow.appendChild(c3);
 
-				for (const [v1, optionMapByV1] of Object.entries(optionMap))
+				const sorted = Object.entries(optionMap).sort((kvp1, kvp2) => kvp1[0] < kvp2[0] ? -1 : 1);
+				for (const [v1, optionMapByV1] of sorted)
 				{
 					const row1 = document.createElement("tr");
 					tbody.appendChild(row1);
@@ -604,7 +607,8 @@
 					row1.appendChild(col1);
 
 					let firstV4 = true;
-					for (const [v4, optionInfo] of Object.entries(optionMapByV1))
+					const sorted2 = Object.entries(optionMapByV1).sort((kvp1, kvp2) => kvp1[0] < kvp2[0] ? -1 : 1);
+					for (const [v4, optionInfo] of sorted2)
 					{
 						let colParent = row1;
 						if (!firstV4)
