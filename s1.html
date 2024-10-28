@@ -594,8 +594,8 @@
 				c3.innerHTML = "kg";
 				titleRow.appendChild(c3);
 
-				const sorted = Object.entries(optionMap).sort((kvp1, kvp2) => kvp1[0] < kvp2[0] ? -1 : 1);
-				for (const [v1, optionMapByV1] of sorted)
+				const sorted3 = Object.entries(optionMap).sort((kvp1, kvp2) => kvp1[0] < kvp2[0] ? -1 : 1);
+				for (const [v1, optionMapByV1] of sorted3)
 				{
 					const row1 = document.createElement("tr");
 					tbody.appendChild(row1);
@@ -607,8 +607,8 @@
 					row1.appendChild(col1);
 
 					let firstV4 = true;
-					const sorted2 = Object.entries(optionMapByV1).sort((kvp1, kvp2) => kvp1[0] < kvp2[0] ? -1 : 1);
-					for (const [v4, optionInfo] of sorted2)
+					const sorted4 = Object.entries(optionMapByV1).sort((kvp1, kvp2) => kvp1[0] < kvp2[0] ? -1 : 1);
+					for (const [v4, optionInfo] of sorted4)
 					{
 						let colParent = row1;
 						if (!firstV4)
