@@ -453,6 +453,12 @@
 
 				const totalRow1 = document.createElement("tr");
 				table1.appendChild(totalRow1);
+
+				const colTotalBLLabel = document.createElement("td");
+				colTotalBLLabel.classList.add("big");
+				colTotalBLLabel.classList.add("tableCellHighlighted");
+				colTotalBLLabel.innerHTML = "B/L";
+				totalRow1.appendChild(colTotalBLLabel);
 				const colTotalV2Label = document.createElement("td");
 				colTotalV2Label.classList.add("big");
 				colTotalV2Label.classList.add("tableCellHighlighted");
@@ -473,14 +479,13 @@
 					totalRow1.appendChild(colTotalV3Label2);
 				}
 
-				const colTotalBLLabel = document.createElement("td");
-				colTotalBLLabel.classList.add("big");
-				colTotalBLLabel.classList.add("tableCellHighlighted");
-				colTotalBLLabel.innerHTML = "B/L";
-				totalRow1.appendChild(colTotalBLLabel);
-
 				const totalRow2 = document.createElement("tr");
 				table1.appendChild(totalRow2);
+
+				const colTotalBL = document.createElement("td");
+				colTotalBL.classList.add("big");
+				colTotalBL.innerHTML = bl;
+				totalRow2.appendChild(colTotalBL);
 
 				const colTotalV2 = document.createElement("td");
 				colTotalV2.classList.add("big");
@@ -502,11 +507,6 @@
 					colTotalV3_2.innerHTML = totalV3.toFixed(2);
 					totalRow2.appendChild(colTotalV3_2);
 				}
-
-				const colTotalBL = document.createElement("td");
-				colTotalBL.classList.add("big");
-				colTotalBL.innerHTML = bl;
-				totalRow2.appendChild(colTotalBL);
 
 				const tableM = document.createElement("table");
 				outputGroup.appendChild(tableM);
