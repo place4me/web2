@@ -8,33 +8,36 @@
 				width: 100%;
 				height: 100%;
 				background-color: rgb(60, 100, 20);
-				margin: 0vmin;
-				overflow-x: hidden;
+				margin: 0;
+				min-width: 300px;
+				overflow-x: auto;
 				text-align: center;
 				font-weight: bold;
 			}
 
 			.twoWayConverter {
-				width: 96vmin;
-				height: 11vmin;
-				font-size: 6vmin;
+				display: flex;
+				align-items: center;
+				width: max(288px, 96vmin);
+				height: max(44px, 11vmin);
+				font-size: max(14px, 6vmin);
 			}
 			.twoWayConverter label {
-				display: inline-block;
-				width: 16vmin;
-				height: 9vmin;
-				margin: 1vmin;
+				flex-shrink: 0;
+				width: max(48px, 16vmin);
+				height: max(36px, 9vmin);
+				margin: max(2px, 0.5vmin);
 				font-size: 0.8em;
 			}
 			.twoWayConverter input {
-				display: inline-block;
-				width: 24vmin;
-				height: 9vmin;
+				flex: 1;
+				min-width: 0;
+				height: max(36px, 9vmin);
 				font-weight: bold;
 				caret-color: black;
-				margin: 1vmin;
+				margin: max(2px, 0.5vmin);
 				font-size: 0.8em;
-				border-radius: 3vmin;
+				border-radius: max(9px, 3vmin);
 				background-color: rgb(180, 180, 150);
 			}
 			.twoWayConverter input:focus {
@@ -42,26 +45,26 @@
 			}
 
 			.oneWayConverter {
-				width: 96vmin;
-				height: 30vmin;
-				font-size: 8vmin;
+				width: max(288px, 96vmin);
+				height: max(90px, 30vmin);
+				font-size: max(16px, 8vmin);
 			}
 			.oneWayConverter label {
 				display: inline-block;
-				width: 38vmin;
-				height: 11vmin;
+				width: max(114px, 38vmin);
+				height: max(44px, 11vmin);
 				margin: auto;
 				font-size: 0.8em;
 			}
 			.oneWayConverter input {
 				display: inline-block;
-				width: 35vmin;
-				height: 9vmin;
+				width: max(105px, 35vmin);
+				height: max(36px, 9vmin);
 				font-weight: bold;
 				caret-color: black;
-				margin: 1vmin;
+				margin: max(3px, 1vmin);
 				font-size: 1em;
-				border-radius: 3vmin;
+				border-radius: max(9px, 3vmin);
 				background-color: rgb(180, 180, 150);
 			}
 			.oneWayConverter input:focus {
@@ -69,22 +72,22 @@
 			}
 			.oneWayConverter div {
 				display: block;
-				width: 96vmin;
-				height: 20vmin;
+				width: max(288px, 96vmin);
+				height: max(60px, 20vmin);
 				color: #c0c0c0;
-				margin: 1vmin;
+				margin: max(3px, 1vmin);
 				font-size: 1em;
 			}
 
 			.button {
-				width: 50vmin;
-				height: 12vmin;
-				font-size: 8vmin;
+				width: max(150px, 50vmin);
+				height: max(36px, 12vmin);
+				font-size: max(16px, 8vmin);
 			}
 
 			.spacer {
 				display: block;
-				height: 5vmin;
+				height: max(15px, 5vmin);
 			}
 		</style>
 	</head>
