@@ -98,6 +98,13 @@
 			<label>kg</label>
 		</div>
 
+		<div class="twoWayConverter">
+			<label>oz</label>
+			<input id="ozInput" type="number"></input>
+			<input id="gInput" type="number"></input>
+			<label>g</label>
+		</div>
+
 		<div class="spacer"></div>
 		<div class="spacer"></div>
 		<div class="spacer"></div>
@@ -150,6 +157,22 @@
 			kgInput.addEventListener("change", function() {
 				const kg = parseFloat(kgInput.value.trim());
 				lbInput.value = (kg / 0.45359237).toFixed(3).toString();
+			});
+
+			//------------------------------------------------------------------------
+			// oz, g
+			//------------------------------------------------------------------------
+
+			const ozInput = document.getElementById("ozInput");
+			const gInput = document.getElementById("gInput");
+
+			ozInput.addEventListener("change", function() {
+				const oz = parseFloat(ozInput.value.trim());
+				gInput.value = (oz * 28.349523125).toFixed(3).toString();
+			});
+			gInput.addEventListener("change", function() {
+				const g = parseFloat(gInput.value.trim());
+				ozInput.value = (g / 28.349523125).toFixed(3).toString();
 			});
 
 			//------------------------------------------------------------------------
