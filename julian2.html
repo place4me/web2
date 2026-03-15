@@ -155,11 +155,11 @@
 
 			lbInput.addEventListener("change", function() {
 				const lb = parseFloat(lbInput.value.trim());
-				kgInput.value = (lb * 0.45359237).toFixed(3).toString();
+				kgInput.value = (lb * 0.45359237).toFixed(4).toString();
 			});
 			kgInput.addEventListener("change", function() {
 				const kg = parseFloat(kgInput.value.trim());
-				lbInput.value = (kg / 0.45359237).toFixed(3).toString();
+				lbInput.value = (kg / 0.45359237).toFixed(4).toString();
 			});
 
 			//------------------------------------------------------------------------
@@ -171,11 +171,11 @@
 
 			ozInput.addEventListener("change", function() {
 				const oz = parseFloat(ozInput.value.trim());
-				gInput.value = (oz * 28.349523125).toFixed(3).toString();
+				gInput.value = (oz * 28.349523125).toFixed(4).toString();
 			});
 			gInput.addEventListener("change", function() {
 				const g = parseFloat(gInput.value.trim());
-				ozInput.value = (g / 28.349523125).toFixed(3).toString();
+				ozInput.value = (g / 28.349523125).toFixed(4).toString();
 			});
 
 			//------------------------------------------------------------------------
@@ -217,12 +217,12 @@
 					cGross = grossSum * (cNet / netSum);
 				}
 
-				dNetInput.value = (dNet <= 0) ? "" : dNet.toFixed(3);
-				dGrossInput.value = (dGross <= 0) ? "" : dGross.toFixed(3);
-				cNetInput.value = (cNet <= 0) ? "" : cNet.toFixed(3);
-				cGrossInput.value = (cGross <= 0) ? "" : cGross.toFixed(3);
-				netSumInput.value = (netSum <= 0) ? "" : netSum.toFixed(3);
-				grossSumInput.value = (grossSum <= 0) ? "" : grossSum.toFixed(3);
+				dNetInput.value = (dNet <= 0) ? "" : dNet.toFixed(4);
+				dGrossInput.value = (dGross <= 0) ? "" : dGross.toFixed(4);
+				cNetInput.value = (cNet <= 0) ? "" : cNet.toFixed(4);
+				cGrossInput.value = (cGross <= 0) ? "" : cGross.toFixed(4);
+				netSumInput.value = (netSum <= 0) ? "" : netSum.toFixed(4);
+				grossSumInput.value = (grossSum <= 0) ? "" : grossSum.toFixed(4);
 			};
 
 			dNetInput.addEventListener("change", function() { calcDC("gross"); });
@@ -241,11 +241,11 @@
 
 			cInput.addEventListener("change", function() {
 				const c = parseFloat(cInput.value.trim());
-				fInput.value = ((c * 9/5) + 32).toFixed(3).toString();
+				fInput.value = ((c * 9/5) + 32).toFixed(4).toString();
 			});
 			fInput.addEventListener("change", function() {
 				const f = parseFloat(fInput.value.trim());
-				cInput.value = ((f - 32) * 5/9).toFixed(3).toString();
+				cInput.value = ((f - 32) * 5/9).toFixed(4).toString();
 			});
 		</script>
 	</footer>
