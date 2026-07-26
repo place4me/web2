@@ -48,6 +48,80 @@
 			td.tableCellHighlighted {
 				background-color: rgb(148, 194, 220);
 			}
+			.converter {
+				color: rgb(240, 240, 100);
+				width: 100%;
+				background-color: rgb(60, 100, 20);
+				margin: 0 0 0 0;
+				padding: 3vh 0 3vh 0;
+				min-width: 300px;
+				overflow-x: auto;
+				text-align: center;
+				font-weight: bold;
+			}
+			.twoWayConverter {
+				display: flex;
+				align-items: center;
+				width: max(288px, 96vmin);
+				height: max(44px, 11vmin);
+				font-size: max(14px, 6vmin);
+			}
+			.twoWayConverter label {
+				flex-shrink: 0;
+				width: max(48px, 16vmin);
+				height: max(36px, 9vmin);
+				margin: max(2px, 0.5vmin);
+				font-size: 0.8em;
+			}
+			.twoWayConverter input {
+				flex: 1;
+				min-width: 0;
+				height: max(36px, 9vmin);
+				font-weight: bold;
+				caret-color: black;
+				margin: max(2px, 0.5vmin);
+				font-size: 0.8em;
+				border-radius: max(9px, 3vmin);
+				background-color: rgb(180, 180, 150);
+			}
+			.twoWayConverter input:focus {
+				background-color: rgb(240, 240, 200);
+			}
+
+			.oneWayConverter {
+				width: max(288px, 96vmin);
+				height: max(90px, 30vmin);
+				font-size: max(16px, 8vmin);
+			}
+			.oneWayConverter label {
+				display: inline-block;
+				width: max(114px, 38vmin);
+				height: max(44px, 11vmin);
+				margin: auto;
+				font-size: 0.8em;
+			}
+			.oneWayConverter input {
+				display: inline-block;
+				width: max(105px, 35vmin);
+				height: max(36px, 9vmin);
+				font-weight: bold;
+				caret-color: black;
+				margin: max(3px, 1vmin);
+				font-size: 1em;
+				border-radius: max(9px, 3vmin);
+				background-color: rgb(180, 180, 150);
+			}
+			.oneWayConverter input:focus {
+				background-color: rgb(240, 240, 200);
+			}
+			.oneWayConverter div {
+				display: block;
+				width: max(288px, 96vmin);
+				height: max(60px, 20vmin);
+				color: #c0c0c0;
+				margin: max(3px, 1vmin);
+				font-size: 1em;
+			}
 			.textInput {
 				width: 18vw;
 				height: 6vh;
@@ -162,7 +236,7 @@
 				margin-top: 0.5vh;
 				margin-bottom: 0.5vh;
 			}
-			#outputGroup {
+			#outputGroupParent {
 				width: 97vw;
 				height: 60vh;
 				text-align: center;
@@ -173,6 +247,13 @@
 				margin-right: 1vw;
 				margin-top: 0.5vh;
 				margin-bottom: 0.5vh;
+				background-color: rgba(100, 100, 100, 1);
+			}
+			#outputGroup {
+				width: 97vw;
+				height: 60vh;
+				text-align: center;
+				font-size: 100%;
 				background-color: rgba(100, 100, 100, 1);
 			}
 			::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -216,7 +297,31 @@
 				<button id="calcButton" class="buttonBold" onclick="calculate()">계산</button>
 			</div>
 		</div>
-		<div id="outputGroup">
+		<div id="outputGroupParent">
+			<div id="outputGroup1">
+			</div>
+			<div class="converter">
+				<div class="twoWayConverter">
+					<label>C net</label>
+					<input id="cNetInput" type="number"></input>
+					<input id="cGrossInput" type="number"></input>
+					<label>C gross</label>
+				</div>
+				<div class="twoWayConverter">
+					<label>D net</label>
+					<input id="dNetInput" type="number"></input>
+					<input id="dGrossInput" type="number"></input>
+					<label>D gross</label>
+				</div>
+				<div class="twoWayConverter">
+					<label>T net</label>
+					<input id="netSumInput" type="number"></input>
+					<input id="grossSumInput" type="number"></input>
+					<label>T gross</label>
+				</div>
+			</div>
+			<div id="outputGroup2">
+		</div>
 		</div>
 
 		<script>
@@ -231,7 +336,9 @@
 
 			const optionGroup = document.getElementById("optionGroup");
 			const buttonGroup = document.getElementById("buttonGroup");
-			const outputGroup = document.getElementById("outputGroup");
+			const outputGroupParent = document.getElementById("outputGroupParent");
+			const outputGroup1 = document.getElementById("outputGroup1");
+			const outputGroup2 = document.getElementById("outputGroup2");
 			const removeButton = document.getElementById("removeButton");
 			const addButton = document.getElementById("addButton");
 			const calcButton = document.getElementById("calcButton");
@@ -445,11 +552,13 @@
 					optionMap[v1][v4].sumV3 += v3;
 				}
 
-				while (outputGroup.children != undefined && outputGroup.children != null && outputGroup.children.length > 0)
-					outputGroup.children[0].remove();
+				while (outputGroup1.children != undefined && outputGroup1.children != null && outputGroup1.children.length > 0)
+					outputGroup1.children[0].remove();
+				while (outputGroup2.children != undefined && outputGroup2.children != null && outputGroup2.children.length > 0)
+					outputGroup2.children[0].remove();
 
 				const table1 = document.createElement("table");
-				outputGroup.appendChild(table1);
+				outputGroup1.appendChild(table1);
 
 				const totalRow1 = document.createElement("tr");
 				table1.appendChild(totalRow1);
@@ -495,21 +604,21 @@
 				const colTotalV3 = document.createElement("td");
 				colTotalV3.classList.add("big");
 				if (weightUnit == "kg")
-					colTotalV3.innerHTML = totalV3.toFixed(2);
+					colTotalV3.innerHTML = totalV3.toFixed(3);
 				else
-					colTotalV3.innerHTML = (totalV3 * 0.453592).toFixed(2);
+					colTotalV3.innerHTML = (totalV3 * 0.453592).toFixed(3);
 				totalRow2.appendChild(colTotalV3);
 
 				if (weightUnit == "lb")
 				{
 					const colTotalV3_2 = document.createElement("td");
 					colTotalV3_2.classList.add("big");
-					colTotalV3_2.innerHTML = totalV3.toFixed(2);
+					colTotalV3_2.innerHTML = totalV3.toFixed(3);
 					totalRow2.appendChild(colTotalV3_2);
 				}
 
 				const tableM = document.createElement("table");
-				outputGroup.appendChild(tableM);
+				outputGroup1.appendChild(tableM);
 
 				const rrr = document.createElement("tr");
 				tableM.appendChild(rrr);
@@ -560,14 +669,14 @@
 					const cc3 = document.createElement("td");
 					cc3.classList.add("big");
 					if (weightUnit == "kg")
-						cc3.innerHTML = v3Summed.toFixed(2);
+						cc3.innerHTML = v3Summed.toFixed(3);
 					else
-						cc3.innerHTML = (v3Summed * 0.453592).toFixed(2);
+						cc3.innerHTML = (v3Summed * 0.453592).toFixed(3);
 					rr.appendChild(cc3);
 				}
 
 				const table2 = document.createElement("table");
-				outputGroup.appendChild(table2);
+				outputGroup2.appendChild(table2);
 				const tbody = document.createElement("tbody");
 				table2.appendChild(tbody);
 
@@ -631,9 +740,9 @@
 						const col4 = document.createElement("td");
 						col4.classList.add("big");
 						if (weightUnit == "kg")
-							col4.innerHTML = optionInfo.sumV3.toFixed(2);
+							col4.innerHTML = optionInfo.sumV3.toFixed(3);
 						else
-							col4.innerHTML = (optionInfo.sumV3 * 0.453592).toFixed(2);
+							col4.innerHTML = (optionInfo.sumV3 * 0.453592).toFixed(3);
 						colParent.appendChild(col4);
 
 						if (firstV4)
@@ -641,12 +750,66 @@
 					}
 				}
 
-				const spacer = document.createElement("div");
-				spacer.style = "height: 10vh; background-color: rgb(148, 194, 220);";
-				outputGroup.appendChild(spacer);
+				const spacer2 = document.createElement("div");
+				spacer2.style = "height: 10vh; background-color: rgb(148, 194, 220);";
+				outputGroup2.appendChild(spacer2);
 
-				outputGroup.scrollTop = 0;
+				outputGroupParent.scrollTop = 0;
 			}
+
+			//------------------------------------------------------------------------
+			// D, C, Net, Gross
+			//------------------------------------------------------------------------
+
+			const dNetInput = document.getElementById("dNetInput");
+			const dGrossInput = document.getElementById("dGrossInput");
+			const cNetInput = document.getElementById("cNetInput");
+			const cGrossInput = document.getElementById("cGrossInput");
+			const netSumInput = document.getElementById("netSumInput");
+			const grossSumInput = document.getElementById("grossSumInput");
+
+			const calcDC = function(changeTarget) {
+				let dNet = parseFloat(dNetInput.value.trim());
+				let dGross = parseFloat(dGrossInput.value.trim());
+				let cNet = parseFloat(cNetInput.value.trim());
+				let cGross = parseFloat(cGrossInput.value.trim());
+				let netSum = parseFloat(netSumInput.value.trim());
+				let grossSum = parseFloat(grossSumInput.value.trim());
+
+				if (Number.isNaN(dNet)) dNet = 0;
+				if (Number.isNaN(dGross)) dGross = 0;
+				if (Number.isNaN(cNet)) cNet = 0;
+				if (Number.isNaN(cGross)) cGross = 0;
+				if (Number.isNaN(netSum)) netSum = 0;
+				if (Number.isNaN(grossSum)) grossSum = 0;
+
+				if (changeTarget == "net" && dGross > 0 && cGross > 0 && netSum > 0) // compute dNet, cNet
+				{
+					grossSum = dGross + cGross;
+					dNet = netSum * (dGross / grossSum);
+					cNet = netSum * (cGross / grossSum);
+				}
+				else if (changeTarget == "gross" && dNet > 0 && cNet > 0 && grossSum > 0) // compute dGross, cGross
+				{
+					netSum = dNet + cNet;
+					dGross = grossSum * (dNet / netSum);
+					cGross = grossSum * (cNet / netSum);
+				}
+
+				dNetInput.value = (dNet <= 0) ? "" : dNet.toFixed(4);
+				dGrossInput.value = (dGross <= 0) ? "" : dGross.toFixed(4);
+				cNetInput.value = (cNet <= 0) ? "" : cNet.toFixed(4);
+				cGrossInput.value = (cGross <= 0) ? "" : cGross.toFixed(4);
+				netSumInput.value = (netSum <= 0) ? "" : netSum.toFixed(4);
+				grossSumInput.value = (grossSum <= 0) ? "" : grossSum.toFixed(4);
+			};
+
+			dNetInput.addEventListener("change", function() { calcDC("gross"); });
+			dGrossInput.addEventListener("change", function() { calcDC("net"); });
+			cNetInput.addEventListener("change", function() { calcDC("gross"); });
+			cGrossInput.addEventListener("change", function() { calcDC("net"); });
+			netSumInput.addEventListener("change", function() { calcDC("net"); });
+			grossSumInput.addEventListener("change", function() { calcDC("gross"); });
 		</script>
 	</body>
 </html>
