@@ -53,6 +53,15 @@
 			td.tableCellHighlighted {
 				background-color: rgb(148, 194, 220);
 			}
+			td.lightYellow {
+				background-color: #FFFFCC;
+			}
+			td.lightRed {
+				background-color: #FFCCCC;
+			}
+			td.lightPurple {
+				background-color: #E5CCFF;
+			}
 			.textInput {
 				width: 15vw;
 				height: 6vh;
@@ -533,11 +542,13 @@
 
 				const colTotalV2 = document.createElement("td");
 				colTotalV2.classList.add("medium");
+				colTotalV2.classList.add("lightYellow");
 				colTotalV2.innerHTML = totalV2.toString();
 				totalRow2.appendChild(colTotalV2);
 
 				const colTotalV3 = document.createElement("td");
 				colTotalV3.classList.add("big");
+				colTotalV3.classList.add("lightYellow");
 				if (weightUnit == "kg")
 					colTotalV3.innerHTML = totalV3.toFixed(3);
 				else
@@ -546,6 +557,7 @@
 
 				const colTotalV4 = document.createElement("td");
 				colTotalV4.classList.add("big");
+				colTotalV4.classList.add("lightYellow");
 				if (weightUnit == "kg")
 					colTotalV4.innerHTML = totalV4.toFixed(3);
 				else
@@ -617,16 +629,28 @@
 
 					const col1 = document.createElement("td");
 					col1.classList.add("small");
+					if (v1 == "C")
+						col1.classList.add("lightPurple");
+					else if (v1 == "D")
+						col1.classList.add("lightRed");
 					col1.innerHTML = v1;
 					row1.appendChild(col1);
 
 					const col2 = document.createElement("td");
 					col2.classList.add("medium");
+					if (v1 == "C")
+						col2.classList.add("lightPurple");
+					else if (v1 == "D")
+						col2.classList.add("lightRed");
 					col2.innerHTML = optionInfo.sumV2;
 					row1.appendChild(col2);
 
 					const col3 = document.createElement("td");
 					col3.classList.add("big");
+					if (v1 == "C")
+						col3.classList.add("lightPurple");
+					else if (v1 == "D")
+						col3.classList.add("lightRed");
 					if (weightUnit == "kg")
 						col3.innerHTML = optionInfo.sumV3.toFixed(3);
 					else
@@ -635,6 +659,10 @@
 
 					const col4 = document.createElement("td");
 					col4.classList.add("big");
+					if (v1 == "C")
+						col4.classList.add("lightPurple");
+					else if (v1 == "D")
+						col4.classList.add("lightRed");
 					if (weightUnit == "kg")
 						col4.innerHTML = optionInfo.sumV4.toFixed(3);
 					else
